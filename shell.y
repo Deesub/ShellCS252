@@ -84,7 +84,7 @@ pipe_list PIPE  command_and_args
 ;
 
 iomodifier_opt:
-	GREAT WORD {
+        | GREAT WORD {
 		printf("   Yacc: insert output \"%s\"\n", $2);
 		Command::_currentCommand._outFile = $2;
 	}
