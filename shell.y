@@ -79,13 +79,14 @@ command_word:
 	;
 
 pipe_list:
-pipe_list PIPE command_and_args 
+pipe_list PIPE  command_and_args
+| command_and_args
 ;
 
 iomodifier_opt:
 	GREAT WORD {
 		printf("   Yacc: insert output \"%s\"\n", $2);
-		Command::_currentCommand._outFile = $2;.
+		Command::_currentCommand._outFile = $2;
 	}
 	| GREATGREAT WORD {
 		printf("   Yacc:insert output \"%s\"\n",$2);
@@ -104,7 +105,7 @@ iomodifier_opt:
 		Command::_currentCommand._errFile = $2;
 	}
 	| LESS WORD {
-		printf("    Yacc: insert input \"%s\"\n",$2)
+		printf("    Yacc: insert input \"%s\"\n",$2);
 		Command::_currentCommand._inputFile = $2;
 		
 	}
