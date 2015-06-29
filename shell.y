@@ -20,6 +20,7 @@
 %{
 #define yylex yylex
 #include <stdio.h>
+#include <string.h>
 #include "command.h"
 void yyerror(const char * s);
 int yylex();
@@ -97,13 +98,13 @@ iomodifier_opt:
 		printf("    Yacc: insert output \"%s\"\n",$2);
 		Command::_currentCommand._outFile = $2;
 		printf("    Yacc: insert error \"%s\"\n",$2);
-		Command::_currentCommand._errFile = $2;
+		Command::_currentCommand._errFile = strdup($2);
 	}
 	| GREATGREATAMPERSAND WORD {
 		printf("    Yacc: insert output \"%s\"\n",$2);
 		Command::_currentCommand._outFile = $2;
 		printf("    Yacc: insert error \"%s\"\n",$2);
-		Command::_currentCommand._errFile = $2;
+		Command::_currentCommand._errFile =strdup($2);
 	}
 	| LESS WORD {
 		printf("    Yacc: insert input \"%s\"\n",$2);
