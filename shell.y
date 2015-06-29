@@ -58,7 +58,7 @@ command_and_args:
 
 arg_list:
 	arg_list argument
-	| /* can be empty */
+	| 
 	;
 
 argument:
