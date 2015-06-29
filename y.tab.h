@@ -41,7 +41,13 @@
      WORD = 258,
      NOTOKEN = 259,
      GREAT = 260,
-     NEWLINE = 261
+     NEWLINE = 261,
+     GREATGREAT = 262,
+     AMPERSAND = 263,
+     GREATAMPERSAND = 264,
+     GREATGREATAMPERSAND = 265,
+     LESS = 266,
+     PIPE = 267
    };
 #endif
 /* Tokens.  */
@@ -49,6 +55,12 @@
 #define NOTOKEN 259
 #define GREAT 260
 #define NEWLINE 261
+#define GREATGREAT 262
+#define AMPERSAND 263
+#define GREATAMPERSAND 264
+#define GREATGREATAMPERSAND 265
+#define LESS 266
+#define PIPE 267
 
 
 
@@ -65,7 +77,7 @@ typedef union YYSTYPE
 
 
 /* Line 1685 of yacc.c  */
-#line 69 "y.tab.h"
+#line 81 "y.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
