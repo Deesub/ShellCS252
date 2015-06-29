@@ -81,10 +81,11 @@ command_word:
 pipe_list:
 pipe_list PIPE  command_and_args
 | command_and_args
+|
 ;
 
 iomodifier_opt:
-        | GREAT WORD {
+        GREAT WORD {
 		printf("   Yacc: insert output \"%s\"\n", $2);
 		Command::_currentCommand._outFile = $2;
 	}
@@ -109,12 +110,14 @@ iomodifier_opt:
 		Command::_currentCommand._inputFile = $2;
 		
 	}
+	|
 	;
 
 background_optional:
 	AMPERSAND {
 	Command::_currentCommand._background = 1;
 	}
+	|
 	;
 %%
 
