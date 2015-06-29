@@ -42,6 +42,9 @@ void myunputc(int c) {
 ">"	{
 		return GREAT;
 	}
+"&"	{
+		return AMPERSAND;
+	}
 
 "<"	{
 		return LESS;
