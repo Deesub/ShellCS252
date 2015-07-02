@@ -177,11 +177,9 @@ Command::execute()
 			fdout=dup(tmpout);
 			}
 			if(_errFile){
-				ferr = open(_errFile,O_RDWR,0700);
+			dup2(fdout,2);
 			}
-			else{
-				ferr = dup(tmperr);
-			}
+
 		}
 		
 		else {
