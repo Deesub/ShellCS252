@@ -42,7 +42,7 @@ command: simple_command
         ;
 
 simple_command:	
-	command_and_args pipe_list io_modifier_list background_optional NEWLINE {
+	command_and_args pipe_list iomodifier_opt background_optional NEWLINE {
 	        printf("   Yacc: Execute command\n");
 		Command::_currentCommand.execute();
 	}
@@ -79,11 +79,6 @@ command_word:
 	}
 	;
 
-pipe_list:
-pipe_list PIPE  command_and_args
-| command_and_args
-|
-;
 
 iomodifier_opt:
         GREAT WORD {
@@ -114,9 +109,9 @@ iomodifier_opt:
 	|
 	;
 
-io_modifier_list:
-	io_modifier_list iomodifier_opt
-	| /*empty*/
+pipe_list:
+	pipe_list PIPE command_and_args
+	| command_and_args
 	;
 
 background_optional:
