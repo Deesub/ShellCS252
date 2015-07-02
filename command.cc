@@ -139,6 +139,8 @@ Command::execute()
 		prompt();
 		return;
 	}
+	if(strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0)
+	_exit(1);
 
 	// Print contents of Command data structure
 //	print();
