@@ -257,7 +257,9 @@ Command::execute()
 void
 Command::prompt()
 {
+if(isatty(0)){
 	printf("myshell>");
+	}
 	fflush(stdout);
 }
 
