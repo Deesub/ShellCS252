@@ -136,8 +136,8 @@ Command::execute()
 	int i = 0;
 	// Don't do anything if there are no simple commands
 	if ( _numberOfSimpleCommands == 0 ) {
-		fflush(stdout);
-		clear();
+		//fflush(stdout);
+		//clear();
 		prompt();
 		return;
 	}
