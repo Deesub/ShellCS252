@@ -170,14 +170,14 @@ Command::execute()
 		if (i == _numberOfSimpleCommands-1){
 			// Last simple command
 			if(_outFile){
-				fdout=open(_outFile,O_RDONLY|O_CREAT|O_TRUNC,0700);
+				fdout=open(_outFile,O_RDWR|O_CREAT|O_TRUNC,0700);
 			}
 			else {
 			// Use default output
 			fdout=dup(tmpout);
 			}
 			if(_errFile){
-				ferr = open(_errFile,O_RDONLY,0700);
+				ferr = open(_errFile,O_RDWR,0700);
 			}
 			else{
 				ferr = dup(tmperr);
