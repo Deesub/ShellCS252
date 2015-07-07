@@ -199,6 +199,8 @@ Command::execute()
 		// Redirect output
 		dup2(fdout,1);
 		close(fdout);
+
+
 		ret=fork();
 		if(ret==0) {
 		execvp(_simpleCommands[i]->_arguments[0],_simpleCommands[i]->_arguments);
@@ -261,8 +263,9 @@ Command::prompt()
 {
 if(isatty(0)){
 	printf("myshell>");
-	}
+	
 	fflush(stdout);
+}
 }
 
 Command Command::_currentCommand;
