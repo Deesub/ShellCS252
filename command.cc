@@ -145,7 +145,7 @@ Command::execute()
 	_exit(1);
 
 	// Print contents of Command data structure
-	print();
+	//print();
 
 	
 
