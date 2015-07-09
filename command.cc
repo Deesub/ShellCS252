@@ -59,7 +59,6 @@ SimpleCommand::insertArgument( char * argument )
 		}
 	}
 	else{
-		_exit(1);
 	}
 }
 
