@@ -148,16 +148,16 @@ Command::execute()
 
 	if(!strcmp(_simpleCommands[i]->_arguments[0],"cd")){
 			char ** p =environ;
-			int c = 0;
+			int count = 0;
 			int res = 0;
 			while(*p != NULL){
 				if(strncmp(*p,"HOME",4)){
-					break;
+					_exit(1);
 					}
 				p++;
-				c++;
+				count++;
 			}
-			char * hdir = (char*)malloc(c);
+			char * hdir = (char*)malloc(count);
 			strcpy(hdir,*p+5);
 		        
 			if(_simpleCommands[i]->_numberOfArguments > 0)
