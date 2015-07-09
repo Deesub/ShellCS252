@@ -161,8 +161,11 @@ Command::execute()
 		        
 			if(_simpleCommands[i]->_numberOfArguments > 0)
 				res = chdir(_simpleCommands[i]->_arguments[1]);
-			else
+			else if(_simpleCommands[i]->_numberOfArguments <= 0)
 				res = chdir(hdir);
+			else{
+				_exit(1);
+			}
 
 			if(res == 0){
 			clear();
