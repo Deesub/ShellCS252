@@ -152,7 +152,7 @@ Command::execute()
 			int res = 0;
 			while(*p != NULL){
 				if(strncmp(*p,"HOME",4)){
-					_exit(1);
+					break;
 					}
 				p++;
 				count++;
