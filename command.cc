@@ -157,8 +157,7 @@ Command::execute()
 				p++;
 				count++;
 			}
-			char * hdir = (char*)malloc(count);
-			strcpy(hdir,*p+5);
+			char hdir[count];
 		        
 			if(_simpleCommands[i]->_numberOfArguments > 0)
 				res = chdir(_simpleCommands[i]->_arguments[1]);
