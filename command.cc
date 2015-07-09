@@ -219,6 +219,16 @@ Command::execute()
 			return;
 		}
 
+		if(!strcmp(_simpleCommands[i]->_arguments[0],"cd")){
+			char ** p =environ;
+			while(*p != NULL){
+				if(strncmp(*p,"HOME",4)){
+					break;
+					}
+				p++;
+			}
+		}
+
 		ret=fork();
 		if(ret==0) {
 			if(!strcmp(_simpleCommands[i]->_arguments[0],"printenv")){
