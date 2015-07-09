@@ -17,6 +17,7 @@
 #include <string.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <pwd.h>
 
 #include "command.h"
 
@@ -44,6 +45,22 @@ SimpleCommand::insertArgument( char * argument )
 	_arguments[ _numberOfArguments + 1] = NULL;
 	
 	_numberOfArguments++;
+
+	int len = strlen(argument);
+	if(len <= 0){
+		_exit(1);
+	}
+	else if(len == 1){
+		if(argument[0] == '~'){
+			argument = strdup(getenv("HOME"));
+		}
+		else{
+			argument = strdup(getpwnam(argument+1)->pw_dir);
+		}
+	}
+	else{
+		_exit(1);
+	}
 }
 
 Command::Command()
