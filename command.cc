@@ -192,14 +192,7 @@ Command::execute()
 				perror("chdir");
 
 		}
-		if(!strcmp(_simpleCommands[i]->_arguments[0],"setenv")){
-			
-			setenv(_simpleCommands[i]->_arguments[1],_simpleCommands[i]->_arguments[2],1);
-			clear();
-			prompt();
-			return;
 
-		}
 
 	// Print contents of Command data structure
 	//print();
@@ -259,7 +252,15 @@ Command::execute()
 
 		
 
-		
+		if(!strcmp(_simpleCommands[i]->_arguments[0],"setenv")){
+			
+			setenv(_simpleCommands[i]->_arguments[1],_simpleCommands[i]->_arguments[2],1);
+			clear();
+			prompt();
+			return;
+
+		}
+
 
 		if(!strcmp(_simpleCommands[i]->_arguments[0],"unsetenv")){
 			unsetenv(_simpleCommands[i]->_arguments[1]);
