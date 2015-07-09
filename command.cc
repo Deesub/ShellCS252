@@ -39,12 +39,7 @@ SimpleCommand::insertArgument( char * argument )
 				  _numberOfAvailableArguments * sizeof( char * ) );
 	}
 	
-	_arguments[ _numberOfArguments ] = argument;
-
-	// Add NULL argument at the end
-	_arguments[ _numberOfArguments + 1] = NULL;
 	
-	_numberOfArguments++;
 
 	int len = strlen(argument);
 	if(len <= 0){
@@ -59,6 +54,12 @@ SimpleCommand::insertArgument( char * argument )
 				argument = strdup(getpwnam(argument+1)->pw_dir);
 		}
 	}
+	_arguments[ _numberOfArguments ] = argument;
+
+	// Add NULL argument at the end
+	_arguments[ _numberOfArguments + 1] = NULL;
+	
+	_numberOfArguments++;
 }
 
 Command::Command()
