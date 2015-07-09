@@ -125,7 +125,87 @@ background_optional:
 	}
 	|
 	;
+
 %%
+
+#include <sys/types.h>
+#include <regex.h>
+#define MAXFILENAME 1024
+void expandWildcards(char * prefix, char * suffix){
+	if(suffix[0] == 0){
+		Command::_currentSimpleCommand->insertArgument(strdup(prefix));
+		return;
+		}
+	char * s = strchr(suffix, '/');
+	char component[MAXFILENAME];
+	if(s!=NULL){
+		strncpy(component,suffix,s-suffix);
+		suffix = s+1;
+	}
+	else{
+		strcpy(component,suffix);
+		suffix = suffix + strlen(suffix);
+	}
+	
+	char newPrefix[MAXFILENAME];
+	char * b;
+	char * c;
+	b = strchr(component,'*');
+	c = strchr(component,'?');
+
+	if(b == NULL && c == NULL){
+		sprintf(newPrefix,"%s/%s",prefix,component);
+		expandWildcards(newPrefix,suffix);
+		return;
+	}
+	
+
+	char * reg = (char*)malloc(2*strlen(component) + 10);
+	char * a = component;
+	char * r = reg;
+	*r = '^';
+	r++;
+
+	while(*a) {
+		if( *a == '?'){
+			*r = '.';
+			r++;
+			*r = '*';
+			r++;
+			}
+		else if(*a == '?'){
+			*r = '.';
+			r++;
+		}
+		else if(*a == '.'){
+			*r = '\\';
+			r++;
+			*r = '.';
+			r++;
+		}
+		else{
+			*r = *a;
+			r++;
+		}
+		a++;
+	}
+	*r = '$';
+	r++;
+	*r = 0;
+
+	int regco;
+	regex_t re;
+	regco = regcomp(&re,reg,0);
+
+	if(regco!=0){
+	perror("compile");
+	return;
+	}
+	
+
+
+
+}
 
 void
 yyerror(const char * s)

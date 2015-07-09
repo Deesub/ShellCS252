@@ -141,8 +141,9 @@ Command::execute()
 		prompt();
 		return;
 	}
-	if(strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0)
+	if(strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0){
 	_exit(1);
+	}
 
 	// Print contents of Command data structure
 	//print();
@@ -200,9 +201,34 @@ Command::execute()
 		dup2(fdout,1);
 		close(fdout);
 
+		if(!strcmp(_simpleCommands[i]->_arguments[0],"setenv")){
+			
+			setenv(_simpleCommands[i]->_arguments[1],_simpleCommands[i]->_arguments[2],1);
+			clear();
+			prompt();
+			return;
+
+		}
+
+		if(!strcmp(_simpleCommands[i]->_arguments[0],"unsetenv")){
+			unsetenv(_simpleCommands[i]->_arguments[1]);
+			clear();
+			prompt();
+			return;
+		}
 
 		ret=fork();
 		if(ret==0) {
+			if(!strcmp(_simpleCommands[i]->_arguments[0],"printenv")){
+				char **p = environ;
+				while(*p != NULL){
+					printf("%s\n",*p);
+					p++;
+				}
+				exit(0);
+			}
+
+
 		execvp(_simpleCommands[i]->_arguments[0],_simpleCommands[i]->_arguments);
 		perror("execvp");
 		_exit(1);
@@ -267,6 +293,12 @@ if(isatty(0)){
 	fflush(stdout);
 }
 }
+
+extern "C" void disp( int sig ){
+	fprintf(stderr,"\n");
+}
+
+
 
 Command Command::_currentCommand;
 SimpleCommand * Command::_currentSimpleCommand;
