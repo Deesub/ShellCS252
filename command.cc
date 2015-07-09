@@ -145,6 +145,36 @@ Command::execute()
 	_exit(1);
 	}
 
+
+	if(!strcmp(_simpleCommands[i]->_arguments[0],"cd")){
+			char ** p =environ;
+			int c = 0;
+			int res = 0;
+			while(*p != NULL){
+				if(strncmp(*p,"HOME",4)){
+					break;
+					}
+				p++;
+				c++;
+			}
+			char * hdir = (char*)malloc(c);
+			strcpy(hdir,*p+5);
+		        
+			if(_simpleCommands[i]->_numberOfArguments > 0)
+				res = chdir(_simpleCommands[i]->_arguments[1]);
+			else
+				res = chdir(hdir);
+
+			if(res == 0){
+			clear();
+			prompt();
+			return;
+			}
+			else
+				perror("chdir");
+
+		}
+
 	// Print contents of Command data structure
 	//print();
 
@@ -219,35 +249,7 @@ Command::execute()
 			return;
 		}
 
-		if(!strcmp(_simpleCommands[i]->_arguments[0],"cd")){
-			char ** p =environ;
-			int c = 0;
-			int res = 0;
-			while(*p != NULL){
-				if(strncmp(*p,"HOME",4)){
-					break;
-					}
-				p++;
-				c++;
-			}
-			char * hdir = (char*)malloc(c);
-			strcpy(hdir,*p+5);
-		        
-			if(_simpleCommands[i]->_numberOfArguments > 0)
-				res = chdir(_simpleCommands[i]->_arguments[1]);
-			else
-				res = chdir(hdir);
-
-			if(res == 0){
-			clear();
-			prompt();
-			return;
-			}
-			else
-				perror("chdir");
-
-		}
-
+		
 		ret=fork();
 		if(ret==0) {
 			if(!strcmp(_simpleCommands[i]->_arguments[0],"printenv")){
