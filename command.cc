@@ -210,6 +210,8 @@ Command::execute()
 
 		}
 
+		
+
 		if(!strcmp(_simpleCommands[i]->_arguments[0],"unsetenv")){
 			unsetenv(_simpleCommands[i]->_arguments[1]);
 			clear();
