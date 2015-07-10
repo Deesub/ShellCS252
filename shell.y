@@ -64,12 +64,11 @@ arg_list:
 
 argument:
 	WORD {
-		if(Command::_currentCommand._outFile){
-		printf("Ambiguous output redirect.\n");
-		}
             /* printf("   Yacc: insert argument \"%s\"\n", $1); */
-
-	       Command::_currentSimpleCommand->insertArgument( $1 );\
+              
+	       
+	       Command::_currentSimpleCommand->insertArgument( $1 );
+	       
 	}
 	;
 
@@ -79,6 +78,7 @@ command_word:
 	       
 	       Command::_currentSimpleCommand = new SimpleCommand();
 	       Command::_currentSimpleCommand->insertArgument( $1 );
+	      
 	}
 	;
 
@@ -91,7 +91,8 @@ iomodifier_opt:
         GREAT WORD {
 		if(Command::_currentCommand._outFile)
 		{
-		printf("Ambiguous output Redirect.\n");
+		printf("Ambiguous output redirect\n");
+		exit(1);
 		}
 		else
 		{
@@ -101,7 +102,8 @@ iomodifier_opt:
 	}
 	| GREATGREAT WORD {
 		if(Command::_currentCommand._outFile){
-		printf("Ambiguous Output Redirect.\n");
+		printf("Ambiguous output redirect\n");
+		exit(1);
 		}
 		else 
 		{
@@ -113,7 +115,8 @@ iomodifier_opt:
 		
 		if(Command::_currentCommand._outFile)
 		{
-		printf("Ambiguous output redirect.\n");
+		printf("Ambiguous output redirect\n");
+		exit(1);
 		}
 		else
 		{
@@ -126,7 +129,8 @@ iomodifier_opt:
 	| GREATGREATAMPERSAND WORD {
 		if(Command::_currentCommand._outFile)
 		{
-		printf("Ambiguous output redirect.\n");
+		printf("Ambiguous output redirect\n");
+		exit(1);
 		}
 		else
 		{
@@ -139,7 +143,8 @@ iomodifier_opt:
 	| LESS WORD {
 		if(Command::_currentCommand._outFile)
 		{
-		printf("Ambiguous output redirect.\n");
+		printf("Ambiguous output redirect\n");
+		exit(1);
 		}
 		else
 		{
