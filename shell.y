@@ -64,6 +64,9 @@ arg_list:
 
 argument:
 	WORD {
+		if(Command::_currentCommand._outFile){
+		printf("Ambiguous output redirect.\n");
+		}
             /* printf("   Yacc: insert argument \"%s\"\n", $1); */
 
 	       Command::_currentSimpleCommand->insertArgument( $1 );\
@@ -86,28 +89,63 @@ iomodifier_list:
 
 iomodifier_opt:
         GREAT WORD {
+		if(Command::_currentCommand._outFile)
+		{
+		printf("Ambiguous output Redirect.\n");
+		}
+		else
+		{
 	 /*	printf("   Yacc: insert output \"%s\"\n", $2); */
 		Command::_currentCommand._outFile = $2;
+		}
 	}
 	| GREATGREAT WORD {
+		if(Command::_currentCommand._outFile){
+		printf("Ambiguous Output Redirect.\n");
+		}
+		else 
+		{
 	 /*	printf("   Yacc: insert output \"%s\"\n",$2); */
-		Command::_currentCommand._outFile = $2; 
+		Command::_currentCommand._outFile = $2;
+		}
 	}
 	| GREATAMPERSAND WORD {
+		
+		if(Command::_currentCommand._outFile)
+		{
+		printf("Ambiguous output redirect.\n");
+		}
+		else
+		{
 	 /*	printf("    Yacc: insert output \"%s\"\n",$2); */
 		Command::_currentCommand._outFile = $2;
 	 /*	printf("    Yacc: insert error \"%s\"\n",$2); */
 		Command::_currentCommand._errFile = strdup($2); 
+		}
 	}
 	| GREATGREATAMPERSAND WORD {
+		if(Command::_currentCommand._outFile)
+		{
+		printf("Ambiguous output redirect.\n");
+		}
+		else
+		{
 	 /*	printf("    Yacc: insert output \"%s\"\n",$2); */
 		Command::_currentCommand._outFile = $2;
 	 /*	printf("    Yacc: insert error \"%s\"\n",$2); */
 		Command::_currentCommand._errFile =strdup($2);
+		}
 	}
 	| LESS WORD {
+		if(Command::_currentCommand._outFile)
+		{
+		printf("Ambiguous output redirect.\n");
+		}
+		else
+		{
 	 /*	printf("    Yacc: insert input \"%s\"\n",$2); */
 		Command::_currentCommand._inputFile = $2;
+		}
 		
 	}
 	

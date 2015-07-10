@@ -351,7 +351,7 @@ if(isatty(0)){
 
 extern "C" void disp( int sig ){
 	fprintf(stderr,"\n");
-	Command::_currentCommand.prompt();
+	//Command::_currentCommand.prompt();
 }
 
 
