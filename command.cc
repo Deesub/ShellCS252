@@ -226,10 +226,10 @@ Command::execute()
 		if (i == _numberOfSimpleCommands-1){
 			// Last simple command
 			if(_outFile){
-				if(_app == 0)
-					fdout=open(_outFile,O_RDWR|O_CREAT|O_TRUNC,0700);
-				else
+				if(_app == 1)
 					fdout=open(_outFile,O_RDWR|O_CREAT|O_APPEND,0700);
+				else
+					fdout=open(_outFile,O_RDWR|O_CREAT|O_TRUNC,0700);
 			}
 			else {
 			// Use default output
@@ -237,10 +237,10 @@ Command::execute()
 			}
 			if(_errFile){
 			//dup2(fdout,2);
-				if(_app == 0)
-					ferr = open(_errFile,O_RDWR|O_CREAT|O_TRUNC,0700);
-				else
+				if(_app == 1)
 					ferr = open(_errFile,O_RDWR|O_CREAT|O_APPEND,0700);
+				else
+					ferr = open(_errFile,O_RDWR|O_CREAT|O_TRUNC,0700);
 				
 			}
 			else{
