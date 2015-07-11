@@ -237,10 +237,6 @@ Command::execute()
 			}
 			if(_errFile){
 			dup2(fdout,2);
-				//if(_app == 0)
-				//	ferr = open(_errFile,O_WRONLY|O_CREAT|O_APPEND,0600);
-				//else
-				//	ferr = open(_errFile,O_WRONLY|O_CREAT|O_TRUNC,0600);
 				
 			}
 			else{
