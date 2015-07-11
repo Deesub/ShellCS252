@@ -128,6 +128,7 @@ iomodifier_opt:
 		}
 	}
 	| GREATGREATAMPERSAND WORD {
+		Command::_currentCommand._app = 1;
 		if(Command::_currentCommand._outFile)
 		{
 		printf("Ambiguous output redirect\n");
