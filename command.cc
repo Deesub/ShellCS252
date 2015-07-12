@@ -42,7 +42,7 @@ SimpleCommand::insertArgument( char * argument )
 	
 
 	int len = strlen(argument);
-	if(len <= 0){
+	if(len < 0){
 		_exit(1);
 	}
 	else {
@@ -175,7 +175,7 @@ Command::execute()
 
 
 
-	if(!strcmp(_simpleCommands[i]->_arguments[0],"cd")){
+	if(!strcmp(_simpleCommands[0]->_arguments[0],"cd")){
 			char ** p =environ;
 			int count = 0;
 			int res = 0;
