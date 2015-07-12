@@ -249,7 +249,6 @@ void expandWildcards(char * prefix, char * suffix){
 	
 
 
-
 }
 
 void
