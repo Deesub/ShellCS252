@@ -243,8 +243,8 @@ void expandWildcards(char * prefix, char * suffix){
 	regco = regcomp(&re,reg,0);
 
 	if(regco!=0){
-	perror("compile");
-	return;
+	perror("BAD regex bro, better luck next time");
+	exit(1);
 	}
 	
 
