@@ -265,7 +265,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	
 
-	char * dir;
+	const char * dir;
 	if(prefix == NULL){
 		dir = ".";
 	}
