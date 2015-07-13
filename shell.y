@@ -285,13 +285,13 @@ void expandWildcards(char * prefix, char * suffix){
 	
 		 if(regexec(&re,ent->d_name,(size_t)0,NULL,0)){
 			if(ent->d_name[0] == '.'){
-				if(arg[0] == '.'){
-					sprintf(newPrefix,"%s%s",prefix,ent->d_name);
-					expandWildcards(newPrefix,suffix);
-				}
-				else
-				{
-				}
+					if(arg[0] == '.'){
+						sprintf(newPrefix,"%s%s",prefix,ent->d_name);
+						expandWildcards(newPrefix,suffix);
+					}
+					else
+					{	
+					}	
 			}
 			else{
 				sprintf(newPrefix,"%s%s",prefix,ent->d_name);
