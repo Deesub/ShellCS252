@@ -18,10 +18,21 @@
 	}
 
 %{
+
+
+
 #define yylex yylex
 #include <stdio.h>
 #include <string.h>
+#include <dirent.h>
+
 #include "command.h"
+#include <regex.h>
+#include <sys/types.h>
+
+#define MAXFILENAME 1024
+
+
 void yyerror(const char * s);
 int yylex();
 
@@ -173,8 +184,6 @@ background_optional:
 
 %%
 
-#include <sys/types.h>
-#include <regex.h>
 #define MAXFILENAME 1024
 void expandWildcards(char * prefix, char * suffix){
 	if(suffix[0] == 0){
@@ -182,31 +191,31 @@ void expandWildcards(char * prefix, char * suffix){
 		return;
 		}
 	char * s = strchr(suffix, '/');
-	char component[MAXFILENAME];
+	char arg[MAXFILENAME];
 	if(s!=NULL){
-		strncpy(component,suffix,s-suffix);
+		strncpy(arg,suffix,s-suffix);
 		suffix = s+1;
 	}
 	else{
-		strcpy(component,suffix);
+		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 	}
 	
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
-	b = strchr(component,'*');
-	c = strchr(component,'?');
+	b = strchr(arg,'*');
+	c = strchr(arg,'?');
 
 	if(b == NULL && c == NULL){
-		sprintf(newPrefix,"%s/%s",prefix,component);
+		sprintf(newPrefix,"%s/%s",prefix,arg);
 		expandWildcards(newPrefix,suffix);
 		return;
 	}
 	
 
-	char * reg = (char*)malloc(2*strlen(component) + 10);
-	char * a = component;
+	char * reg = (char*)malloc(2*strlen(arg) + 10);
+	char * a = arg;
 	char * r = reg;
 	*r = '^';
 	r++;
@@ -246,9 +255,52 @@ void expandWildcards(char * prefix, char * suffix){
 	perror("BAD regex bro, better luck next time");
 	exit(1);
 	}
+
+	/*char * expbuf = compile(reg,expbuf,&expbuf[strlen(expbuf)],-1);
+
+	if(expbuf == NULL){
+		perror("compile");
+		return;
+	}*/
+	
 	
 
+	char * dir;
+	if(prefix == NULL){
+		dir = ".";
+	}
+	else
+	{
+		dir = prefix;
+	}
+	
+	DIR * d = opendir(dir);
+	if(d == NULL){
+		return;
+	}
 
+	struct dirent * ent;
+
+	while((ent = readdir(d))!=NULL){
+	
+		 if(regexec(&re,ent->d_name,0,NULL,0)){
+			if(ent->d_name[0] == '.'){
+				if(arg[0] == '.'){
+					sprintf(newPrefix,"%s%s",prefix,ent->d_name);
+					expandWildcards(newPrefix,suffix);
+				}
+				else
+				{
+				}
+			}
+			else{
+				sprintf(newPrefix,"%s%s",prefix,ent->d_name);
+				expandWildcards(newPrefix,suffix);
+			}
+		}	
+
+	}
+	closedir(d);
 }
 
 void
