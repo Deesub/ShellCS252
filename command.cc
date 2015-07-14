@@ -394,7 +394,7 @@ main()
 	}
 	
 	struct sigaction signalAction1;
-	signalAction1.sa_handler = killzombie;
+	signalAction1.sa_handler = disp;
 	sigemptyset(&signalAction1.sa_mask);
 	signalAction1.sa_flags = SA_RESTART;
 	int error1 = sigaction(SIGINT, &signalAction1, NULL );
