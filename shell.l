@@ -60,5 +60,14 @@ void myunputc(int c) {
 		return WORD;
 	}
 
-	
+\"[^\n\"]*\"       {
+		
+		for(int i = 0;yytext[i] != '\0';i++){
+			yylval.string_val[i] = yytext[i+1];
+		
+		}
+		yylval.string_val[strlen(yytext)-1] = '\0';
+
+		return WORD;
+	}
 
