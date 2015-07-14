@@ -191,8 +191,8 @@ Command::execute()
 			}
 			char hdir[count];
 		        
-			if(_simpleCommands[i]->_numberOfArguments > 0)
-				res = chdir(_simpleCommands[i]->_arguments[1]);
+			if(_simpleCommands[i]->_numberOfArguments > 1)
+				res = chdir(_simpleCommands[0]->_arguments[1]);
 			else if(_simpleCommands[i]->_numberOfArguments <= 0)
 				res = chdir(hdir);
 			else{
