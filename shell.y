@@ -284,27 +284,18 @@ void expandWildcards(char * prefix, char * suffix){
 	while((ent = readdir(d))!=NULL){
 	
 		if(regexec(&re,ent->d_name,(size_t)0,NULL,0)!=0){
-			/*if(ent->d_name[0] == '.'){*/
+			if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
 						sprintf(newPrefix,"%s%s",prefix,ent->d_name);
 						expandWildcards(newPrefix,suffix);
 					}
 					else
-					{	
-
-						if(ent->d_name[0] == '.'){
-						}	
-						else{
-							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
-							expandWildcards(newPrefix,suffix);
-						}	
-
+					{		
+						sprintf(newPrefix,"%s%s",prefix, ent->d_name);
+						expandWildcards(newPrefix,suffix);
 					}	
-		/*	}
-			else{
-				sprintf(newPrefix,"%s%s",prefix,ent->d_name);
-				expandWildcards(newPrefix,suffix);
-			}*/
+	
+			}
 		}	
 
 	}
