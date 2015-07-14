@@ -65,6 +65,7 @@ void myunputc(int c) {
 		char * st = strdup(yytext);
 			st++;
 		st[strlen(st) - 1] = 0;
+		yylval.string_val = st;
 		return WORD;
 		
 	}
