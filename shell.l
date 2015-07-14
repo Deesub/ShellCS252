@@ -53,13 +53,6 @@ void myunputc(int c) {
 		return PIPE;
 	}
 
-
-[^ \t\n][^ \t\n]*  {
-		/* Assume that file names have only alpha chars */
-		yylval.string_val = strdup(yytext);
-		return WORD;
-	}
-
 \"[^\n\"]*\" {
 	int end = 0;
 	int i = 0;
@@ -81,6 +74,7 @@ void myunputc(int c) {
 	return WORD;
 }
 
+
 \"[^\n\"]*\"    {
         /* quoted string */
         char *new_string = (char*)malloc(sizeof(char) * 1028);
@@ -98,5 +92,39 @@ void myunputc(int c) {
         free(new_string);
         return WORD;
     }   
+
+
+[^ \t\n&<>\|]*\\[^ \t\n]*    {
+        /* escape characters */
+        char *sNewArg = (char*) malloc(1024*sizeof(char));
+
+        int i = 0; int j = 0;
+
+        for(i = 0; i != strlen(yytext); i++){
+            if(yytext[i] == 92){
+                // means escape char was hit
+                if(yytext[i+1] == 92){
+                    sNewArg[j] = yytext[i+1];
+                    i++; j++;
+                }
+            }
+			else {
+            	sNewArg[j] = yytext[i];
+            	j++;
+			}
+        }
+       
+        yylval.string_val = strdup(sNewArg);
+        return WORD;
+       
+    }
+
+
+[^ \t\n][^ \t\n]*  {
+		/* Assume that file names have only alpha chars */
+		yylval.string_val = strdup(yytext);
+		return WORD;
+	}
+
 	
 
