@@ -351,9 +351,13 @@ if(isatty(0)){
 }
 }
 
-extern "C" void disp( int sig ){
+void disp( int sig ){
 	fprintf(stderr,"\n");
-	//Command::_currentCommand.prompt();
+	Command::_currentCommand.prompt();
+}
+
+void killzombie(int sig){
+	while(waitpid(-1,NULL,WNOHANG) > 0);
 }
 
 
@@ -364,7 +368,31 @@ SimpleCommand * Command::_currentSimpleCommand;
 int yyparse(void);
 
 main()
-{
+{	
+
+	struct sigaction signalAction;
+	signalAction.sa_handler = killzombie;
+	sigemptyset(&signalAction.sa_mask);
+	signalAction.sa_flags = SA_RESTART;
+	int error = sigaction(SIGCHLD, &signalAction, NULL );
+	if ( error )
+	{
+		perror( "sigaction" );
+		exit( -1 );
+	}
+	
+	struct sigaction signalAction1;
+	signalAction1.sa_handler = killzombie;
+	sigemptyset(&signalAction1.sa_mask);
+	signalAction1.sa_flags = SA_RESTART;
+	int error1 = sigaction(SIGINT, &signalAction1, NULL );
+	if ( error1 )
+	{
+		perror( "sigaction" );
+		exit( -1 );
+	}
+
+
 	Command::_currentCommand.prompt();
 	yyparse();
 }
