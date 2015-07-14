@@ -60,3 +60,43 @@ void myunputc(int c) {
 		return WORD;
 	}
 
+\"[^\n\"]*\" {
+	int end = 0;
+	int i = 0;
+	
+	while ( yytext[i] != '\0' ) {
+		if (i == 0) {		
+			i++;
+			//printf("here1\n");
+			continue;
+		}
+
+		yylval.string_val[i-1] = yytext[i];
+		//printf("%c\n", yytext[i]);
+		end = i;
+		i++;
+	}
+
+	yylval.string_val[end-1] = '\0';
+	return WORD;
+}
+
+\"[^\n\"]*\"    {
+        /* quoted string */
+        char *new_string = (char*)malloc(sizeof(char) * 1028);
+        int i = 0;
+        int j = 0;
+        for(i = 0; yytext[i] != '\0'; i++){
+            if(yytext[i] == 34){
+                continue;
+            }
+            new_string[j] = yytext[i];
+            j++;
+        }
+        //fprintf(stderr, "%s\n\n", new_string);
+        yylval.string_val = strdup(new_string);
+        free(new_string);
+        return WORD;
+    }   
+	
+
