@@ -300,6 +300,7 @@ void expandWildcards(char * prefix, char * suffix){
 
 	}
 	closedir(d);
+	return;
 }
 
 void
