@@ -178,26 +178,16 @@ Command::execute()
 
 
 
-	if(!strcmp(_simpleCommands[0]->_arguments[0],"cd")){
-			char ** p =environ;
-			int count = 0;
+	if(strcmp(_simpleCommands[i]->_arguments[0],"cd") == 0){
+		
 			int res = 0;
-			while(*p != NULL){
-				if(strncmp(*p,"HOME",4)){
-					break;
-					}
-				p++;
-				count++;
-			}
-			char hdir[count];
-		        
-			if(_simpleCommands[i]->_numberOfArguments > 1)
-				res = chdir(_simpleCommands[0]->_arguments[1]);
-			else if(_simpleCommands[i]->_numberOfArguments <= 0)
+			char * argv1 = _simpleCommands[0]->_arguments[1];
+			char * hdir = getenv("HOME");
+			if(argv1 != NULL && _simpleCommands[0]->_numberOfArguments >= 1 )
+				res = chdir(argv1);
+			else
+				//char * hdir = getenv("HOME");
 				res = chdir(hdir);
-			else{
-				_exit(1);
-			}
 
 			if(res == 0){
 			clear();
