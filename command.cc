@@ -47,8 +47,8 @@ SimpleCommand::insertArgument( char * argument )
 	if(len < 0){
 		_exit(1);
 	}
-	else {
-		if(argument[0] == '~' && len == 1){
+	else if(len == 1){
+		if(argument[0] == '~' ){
 				argument = strdup(getenv("HOME"));
 		}
 		else{
