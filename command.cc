@@ -190,9 +190,9 @@ Command::execute()
 				res = chdir(hdir);
 
 			if(res == 0){
-			clear();
-			prompt();
-			return;
+				clear();
+				prompt();
+				return;
 			}
 			else
 				perror("chdir");
