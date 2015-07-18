@@ -67,7 +67,7 @@ SimpleCommand::insertArgument( char * argument )
 				k = j;
 			}
 			no[k] = '\0';
-			j = 0;
+			//j = 0;
 			strcat(exp,no);
 			free(no);
 			i--;
