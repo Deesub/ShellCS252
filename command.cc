@@ -70,7 +70,7 @@ SimpleCommand::insertArgument( char * argument )
 			j = 0;
 			strcat(exp,no);
 			free(no);
-			//i--;
+			i--;
 		}
 	
 	}
