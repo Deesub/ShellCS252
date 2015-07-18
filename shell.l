@@ -80,34 +80,7 @@ void myunputc(int c) {
 	}
 
 
-[^ ^\\&<>|\t\n]    {
-		 char *buff = strdup(yytext);
-    		 char *word = (char*)malloc(strlen(yytext) + 1);
-    
-	  	 int j;
-    		 j = 0;
 
-    			int i;
-    			i = 0;
-   		 while (i < strlen(buff) + 1)
-    			{
-        		if (buff[i] == '\\')
-        			{
-            				word[j] = buff[i+1];
-            				i = i + 2;
-        		}
-        		else
-        		{
-            			word[j] = buff[i];
-            			i++;
-        		}
-
-        		j++;
-    			}
-
-    		yylval.string_val = strdup(word);
-    		return WORD;
-	}
 	
 
 
