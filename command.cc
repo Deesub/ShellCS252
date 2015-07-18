@@ -61,7 +61,7 @@ SimpleCommand::insertArgument( char * argument )
 			j = 0;
 		}
 		else{ 
-			for(i;argument[i] != '$';i++){
+			for(i;argument[i] != '$' && argument[i] != '\0';i++){
 				env[j++] = argument[i];		
 				k = j;
 			}
