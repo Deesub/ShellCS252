@@ -219,9 +219,9 @@ void expandWildcards(char * prefix, char * suffix){
 		else if(prefix == NULL && arg != NULL){
 			sprintf(newPrefix,"%s",arg);
 		}
-		if(arg == NULL){
+		/*if(arg == NULL){
 			expandWildcards("",suffix);
-		}
+		}*/
 		return;
 	}
 	
@@ -346,7 +346,7 @@ void expandWildcards(char * prefix, char * suffix){
 	for(int i = 0;i < nEntries; i++){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
-	free(array);
+/*	free(array); */
 	return;
 }
 
