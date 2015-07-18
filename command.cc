@@ -43,6 +43,7 @@ SimpleCommand::insertArgument( char * argument )
 	
 	int len = strlen(argument);
 	int i = 0;
+	int j = 0;
 	int k = 0;
 	char * env = (char*)malloc(100);
 	char * exp = (char*)malloc(100);
@@ -51,13 +52,13 @@ SimpleCommand::insertArgument( char * argument )
 		if(argument[i] ==  '$'){
 			i += 2;
 			for(i;argument[i] != '}';i++){
-				int j = 0;
 				env[j++] = argument[i];
 				k = j;
 			}
 			env[k] = '\0';
 			strcat(exp,getenv(env));
 			free(env);
+			j = 0;
 		}
 		else{ 
 			int j = 0;
@@ -66,11 +67,12 @@ SimpleCommand::insertArgument( char * argument )
 				k = j;
 			}
 			//env[k] = '\0';
-			k = 0;
+			j = 0;
 			strcat(exp,env);
 			free(env);
-			
+			i--;
 		}
+		i++;
 	}
 	argument = strdup(exp);
 	}
