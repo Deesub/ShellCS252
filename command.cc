@@ -50,36 +50,34 @@ SimpleCommand::insertArgument( char * argument )
 	char * env = (char*)malloc(100);
 	char * exp = (char*)malloc(100);
 	if(strchr(argument,'$') != NULL){
-	if(count == 1){
-		i--;
-	}
-	for(i = 0; argument[i] != '\0';i++){
-		if(argument[i] ==  '$'){
-			i += 2;
-			for(i;argument[i] != '}';i++){
-				env[j++] = argument[i];
-			}
-			k = j;
-			env[k] = '\0';
-			strcat(exp,getenv(env));
-			free(env);
-			j = 0;
-		}
-		else{ 
-			for(i;argument[i] != '$' && argument[i] != '\0';i++){
-				no[j++] = argument[i];		
+
+		for(i = 0; argument[i] != '\0';i++){
+			if(argument[i] ==  '$'){
+				i += 2;
+				for(i;argument[i] != '}';i++){
+					env[j++] = argument[i];
+				}
 				k = j;
+				env[k] = '\0';
+				strcat(exp,getenv(env));
+				free(env);
+				j = 0;
 			}
-			no[k] = '\0';
-			strcat(exp,no);
-			free(no);
-			count = 1;
-			//i--;
-			j = 0;
-		}
+			else{ 
+				for(i;argument[i] != '$' && argument[i] != '\0';i++){
+					no[j++] = argument[i];		
+					k = j;
+				}
+				no[k] = '\0';
+				strcat(exp,no);
+				free(no);
+				count = 1;
+				i--;
+				j = 0;
+			}	
 	
-	}
-	argument = strdup(exp);
+		}
+		argument = strdup(exp);
 	}
 	if(len < 0){
 		_exit(1);
