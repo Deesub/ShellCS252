@@ -72,7 +72,7 @@ void myunputc(int c) {
 		
 	}
 
-[^ \t\n&<>\|]*\\[^ \t\n]*    {
+[^ \t\n&<>\]*\\[^ \t\n]*    {
         /* escape characters */
         char *sNewArg = (char*) malloc(1024*sizeof(char));
 
