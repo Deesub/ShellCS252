@@ -67,16 +67,48 @@ void myunputc(int c) {
 
 
 \"[^\n\"]*\"       {
-		int last = 0;
+	/*	int last = 0;
 		char * st = strdup(yytext);
 			st++;
 		st[strlen(st) - 1] = 0;
 		yylval.string_val = st;
+		return WORD; */
+		yylval.string_val = strdup(yytext+1);
+		yylval.string_val[strlen(yylval.string_val)-1] = 0;
 		return WORD;
 		
 	}
-   
 
+
+[^ ^\\&<>|\t\n][^ ^\\&<>|\t\n]*  {
+		 char *buff = strdup(yytext);
+    		 char *word = (char*)malloc(strlen(yytext) + 1);
+    
+	  	 int j;
+    		 j = 0;
+
+    			int i;
+    			i = 0;
+   		 while (i < strlen(buff) + 1)
+    			{
+        		if (buff[i] == '\\')
+        			{
+            				word[j] = buff[i+1];
+            				i = i + 2;
+        		}
+        		else
+        		{
+            			word[j] = buff[i];
+            			i++;
+        		}
+
+        		j++;
+    			}
+
+    		yylval.string_val = strdup(word);
+    		return WORD;
+}
+	
 
 
 
