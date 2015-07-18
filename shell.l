@@ -61,15 +61,16 @@ void myunputc(int c) {
 	}
 
 
-\"[^\n\"]*\"       {
-		int last = 0;
+
+	/*	int last = 0;
 		char * st = strdup(yytext);
 			st++;
 		st[strlen(st) - 1] = 0;
 		yylval.string_val = st;
-		return WORD;
+		return WORD; */
 		
-	}
+	
+
 \"[^\n\"]*\" {
 	int end = 0;
 	int i = 0;
