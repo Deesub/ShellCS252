@@ -11,12 +11,16 @@
 
 #include <string.h>
 #include "y.tab.h"
+#include <unistd.h>
+#include <errno.h>
+
 
 static  void yyunput (int c,char *buf_ptr  );
 
 void myunputc(int c) {
     unput(c);
 }
+
 
 %}
 
