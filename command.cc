@@ -45,10 +45,14 @@ SimpleCommand::insertArgument( char * argument )
 	int i = 0;
 	int j = 0;
 	int k = 0;
+	int count = 0;
 	char * no = (char*)malloc(100);
 	char * env = (char*)malloc(100);
 	char * exp = (char*)malloc(100);
 	if(strchr(argument,'$') != NULL){
+	if(count == 1){
+		i--;
+	}
 	for(i = 0; argument[i] != '\0';i++){
 		if(argument[i] ==  '$'){
 			i += 2;
@@ -69,7 +73,8 @@ SimpleCommand::insertArgument( char * argument )
 			no[k] = '\0';
 			strcat(exp,no);
 			free(no);
-			i--;
+			count = 1;
+			//i--;
 			j = 0;
 		}
 	
