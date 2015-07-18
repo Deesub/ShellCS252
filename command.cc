@@ -61,7 +61,6 @@ SimpleCommand::insertArgument( char * argument )
 			j = 0;
 		}
 		else{ 
-			int j = 0;
 			for(i;argument[i] != '$';i++){
 				env[j++] = argument[i];		
 				k = j;
@@ -72,7 +71,7 @@ SimpleCommand::insertArgument( char * argument )
 			free(env);
 			i--;
 		}
-		i++;
+	
 	}
 	argument = strdup(exp);
 	}
