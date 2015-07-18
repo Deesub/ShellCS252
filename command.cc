@@ -59,7 +59,7 @@ SimpleCommand::insertArgument( char * argument )
 			strcat(exp,getenv(env));
 			free(env);
 		}
-		else if(argument[i] != '$'){ 
+		else{ 
 			int j = 0;
 			for(i;argument[i] != '}';i++){
 				env[j++] = argument[i];		
