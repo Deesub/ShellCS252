@@ -60,6 +60,7 @@ void myunputc(int c) {
 		return WORD;
 	}
 
+
 \"[^\n\"]*\"       {
 		int last = 0;
 		char * st = strdup(yytext);
@@ -69,4 +70,25 @@ void myunputc(int c) {
 		return WORD;
 		
 	}
+\"[^\n\"]*\" {
+	int end = 0;
+	int i = 0;
+	
+	while ( yytext[i] != '\0' ) {
+		if (i == 0) {		
+			i++;
+			//printf("here1\n");
+			continue;
+		}
+
+		yylval.string_val[i-1] = yytext[i];
+		//printf("%c\n", yytext[i]);
+		end = i;
+		i++;
+	}
+
+	yylval.string_val[end-1] = '\0';
+	return WORD;
+}
+
 
