@@ -46,6 +46,7 @@ SimpleCommand::insertArgument( char * argument )
 	int k = 0;
 	char * env = (char*)malloc(100);
 	char * exp = (char*)malloc(100);
+	if(strchr(argument,'$') != NULL){
 	for(i = 0; argument[i] != '\0';i++){
 		if(argument[i] ==  '$'){
 			i += 2;
@@ -71,7 +72,7 @@ SimpleCommand::insertArgument( char * argument )
 		}
 	}
 	argument = strdup(exp);
-	
+	}
 	if(len < 0){
 		_exit(1);
 	}
