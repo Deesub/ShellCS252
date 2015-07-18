@@ -42,26 +42,46 @@ SimpleCommand::insertArgument( char * argument )
 	}
 	
 	int len = strlen(argument);
-	char* val = (char*)malloc(1024);
-	int j = 0;
-	int k = 0;
-	char *path = (char*)malloc(1024);
-	int count = 0;
-	
-	for(int i = 0;i < len-1; i++){
-		if(argument[i] == '$' && argument[i+1] == '{' && argument[i+2] != '\0'){
-			while(argument[i+2] != '}'){
-				j = i+2;
-				val[k] = argument[j];
-				k++;
-				j++;
-			}
-			val[k] = '\0';
-			path = getenv(val);
-		}
-
-
-	}	
+	char* finalString = (char*)malloc(2048);
+    if (strchr(argument, '$'))
+    {
+        int j = 0;
+        int k = 0;
+        while(argument[j] != '\0')
+        {
+            if (argument[j] == '$')
+            {
+                char* var = (char*)malloc(strlen(argument));
+                j += 2;
+                while(argument[j] != '}')
+                {
+                    var[k] = argument[j];
+                    k++;
+                    j++;
+                }
+                var[k] = '\0';
+                strcat(finalString, getenv(var));
+                free(var);
+                k = 0;
+            }
+            else
+            {
+                char* temp = (char*)malloc(strlen(argument));
+                while(argument[j] != '\0' && argument[j] != '$')
+                {
+                    temp[k] = argument[j];
+                    k++;
+                    j++;
+                }
+                k = 0;
+                strcat(finalString, temp);
+                free(temp);
+                j--;
+            }
+            j++;
+        }
+        argument = strdup(finalString);
+    }	
 
 	if(len < 0){
 		_exit(1);
