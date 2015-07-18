@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
-
+#include <assert.h>
 #include "command.h"
 #include <regex.h>
 #include <sys/types.h>
@@ -212,8 +212,16 @@ void expandWildcards(char * prefix, char * suffix){
 	c = strchr(arg,'?');
 
 	if(b == NULL && c == NULL){
-		sprintf(newPrefix,"%s/%s",prefix,arg);
-		expandWildcards(newPrefix,suffix);
+		if( prefix != NULL && arg != NULL){
+			sprintf(newPrefix,"%s%s",prefix,arg);
+			expandWildcards(newPrefix,suffix);
+		}
+		else if(prefix == NULL && arg != NULL){
+			sprintf(newPrefix,"%s",arg);
+		}
+		if(arg == NULL){
+			expandWildcards("",suffix);
+		}
 		return;
 	}
 	
@@ -284,10 +292,19 @@ void expandWildcards(char * prefix, char * suffix){
 	}
 
 	struct dirent * ent;
-
+	int maxEntries = 20;
+	int nEntries = 0;
+	char ** array = (char**)malloc(maxEntries*sizeof(char*));
+	
 	while((ent = readdir(d))!=NULL){
 	
 		if(regexec(&re,ent->d_name,0,NULL,0)!=0){
+			if(nEntries == maxEntries){
+				maxEntries*=2;
+				array = (char**)realloc(array,maxEntries * sizeof(char*));
+				assert(array!=NULL);
+			}
+			
 			if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
 						sprintf(newPrefix,"%s%s",prefix,ent->d_name);
@@ -300,10 +317,20 @@ void expandWildcards(char * prefix, char * suffix){
 					}	
 	
 			}
+			array[nEntries] = strdup(ent->d_name);
+			nEntries++;
+
 		}	
 
 	}
 	closedir(d);
+	/*sortArrayStrings(array,nEntries);*/
+	int i = 0;;
+	for(int i = 0;i < nEntries; i++){
+		Command::_currentSimpleCommand->insertArgument(array[i]);
+	}
+	free(array);
+	return;
 }
 
 void
