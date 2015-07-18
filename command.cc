@@ -65,7 +65,8 @@ SimpleCommand::insertArgument( char * argument )
 				env[j++] = argument[i];		
 				k = j;
 			}
-			env[k] = '\0';
+			//env[k] = '\0';
+			k = 0;
 			strcat(exp,env);
 			free(env);
 			
