@@ -80,7 +80,7 @@ void myunputc(int c) {
 	}
 
 
-[^ ^\\&<>|\t\n][^ ^\\&<>|\t\n]*  {
+[^ ^\\&<>|\t\n]  {
 		 char *buff = strdup(yytext);
     		 char *word = (char*)malloc(strlen(yytext) + 1);
     
@@ -107,7 +107,7 @@ void myunputc(int c) {
 
     		yylval.string_val = strdup(word);
     		return WORD;
-}
+	}
 	
 
 
