@@ -307,13 +307,30 @@ void expandWildcards(char * prefix, char * suffix){
 			
 			if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
-						sprintf(newPrefix,"%s%s",prefix,ent->d_name);
-						expandWildcards(newPrefix,suffix);
+						if(prefix != NULL){
+							sprintf(newPrefix,"%s%s",prefix,ent->d_name);
+							expandWildcards(newPrefix,suffix);
+						}
+						else if(prefix == NULL){
+							sprintf(newPrefix,"%s",ent->d_name);
+							expandWildcards(newPrefix,suffix);
+						}
+						else{
+						}
+
 					}
 					else
-					{		
-						sprintf(newPrefix,"%s%s",prefix, ent->d_name);
-						expandWildcards(newPrefix,suffix);
+					{	if(prefix != NULL){
+							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
+							expandWildcards(newPrefix,suffix);
+						}
+						else if(prefix == NULL){
+							sprintf(newPrefix,"%s",ent->d_name);
+							expandWildcards(newPrefix,suffix);
+						}
+						else{
+						}
+
 					}	
 	
 			}
