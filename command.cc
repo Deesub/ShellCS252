@@ -42,6 +42,35 @@ SimpleCommand::insertArgument( char * argument )
 	}
 	
 	int len = strlen(argument);
+	int i = 0;
+	int k = 0;
+	char * env = (char*)malloc(100);
+	char * exp = (char*)malloc(100);
+	for(i = 0; argument[i] != '\0';i++){
+		if(argument[i] ==  '$'){
+			i += 2;
+			for(i;argument[i] != '}';i++){
+				int j = 0;
+				env[j++] = argument[i];
+				k = j;
+			}
+			env[k] = '\0';
+			strcat(exp,getenv(env));
+			free(env);
+		}
+		else if(argument[i] != '$'){ 
+			int j = 0;
+			for(i;argument[i] != '}';i++){
+				env[j++] = argument[i];		
+			}
+			int k = j;
+			env[k] = '\0';
+			strcat(exp,env);
+			free(env);
+			
+		}
+	}
+	argument = strdup(exp);
 	
 	if(len < 0){
 		_exit(1);
