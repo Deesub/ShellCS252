@@ -358,15 +358,19 @@ void expandWildcards(char * prefix, char * suffix){
 void sortArrayStrings(char ** arr,int num){
 	int i = 0;
 	int j = 0;
-	for(;i < num - 1;i++){
+	int boole = 1;
+	do{
+		boole = 1;
 		for(;j < num -1; j++){
 			if(strcmp(arr[j],arr[j+1]) > 0){
 				char * tmp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = tmp;
+				boole = 0;
 			}
 		}
 	}
+	while(boole);
 }
 
 void
