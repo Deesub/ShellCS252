@@ -82,7 +82,6 @@ void myunputc(int c) {
 
  `[^\n`]*`	{
 	char cmd[100];
-	char buff[100];
 	int i = 0;
 	int j = 0;
 	int ctr = 0;
@@ -126,10 +125,9 @@ void myunputc(int c) {
 		args[1] = NULL;
 
 		execvp(args[0],args);
-		if(execvp(args[0],args) < 0){
 			perror("execvp");
 			exit(1);			
-		}
+		
 	}
 	else if(ret < 0){
 		perror("fork");
