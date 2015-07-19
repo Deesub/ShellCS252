@@ -72,7 +72,7 @@ SimpleCommand::insertArgument( char * argument )
 				strcat(exp,no);
 				free(no);
 				count = 1;
-				i--;
+				//i--;
 				j = 0;
 			}	
 	
