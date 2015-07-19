@@ -126,7 +126,7 @@ void myunputc(int c) {
 		args[0] = "shell";
 		args[1] = NULL;
 
-		execvp(args[0],args);
+		/*execvp(args[0],args);*/
 		if(execvp(args[0],args)<0){
 			perror("execvp");
 			exit(1);
