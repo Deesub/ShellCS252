@@ -68,7 +68,6 @@ SimpleCommand::insertArgument( char * argument )
 				exp = getenv(env);
 				strcat(f,exp);
 				free(env);
-				free(exp);
 				j = 0;
 			}
 			else{ 
