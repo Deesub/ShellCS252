@@ -68,6 +68,7 @@ SimpleCommand::insertArgument( char * argument )
 				exp = getenv(env);
 				strcat(f,exp);
 				free(env);
+				free(exp);
 				j = 0;
 			}
 			else{ 
@@ -90,7 +91,7 @@ SimpleCommand::insertArgument( char * argument )
 			}	
 	
 		}
-		argument = strdup(exp);
+		argument = strdup(f);
 	}
 	if(len < 0){
 		_exit(1);
