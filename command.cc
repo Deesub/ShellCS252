@@ -60,7 +60,7 @@ SimpleCommand::insertArgument( char * argument )
 				k = j;
 				env[k] = '\0';
 				strcat(exp,getenv(env));
-				free(env);
+				//free(env);
 				j = 0;
 			}
 			else{ 
@@ -70,7 +70,7 @@ SimpleCommand::insertArgument( char * argument )
 				}
 				no[k] = '\0';
 				strcat(exp,no);
-				free(no);
+				//free(no);
 				count = 1;
 				i--;
 				j = 0;
