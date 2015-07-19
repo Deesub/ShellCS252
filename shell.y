@@ -84,9 +84,12 @@ argument:
 	WORD {
             /* printf("   Yacc: insert argument \"%s\"\n", $1); */
               
-	       
-	       Command::_currentSimpleCommand->insertArgument( $1 );
-	       expandWildcards(NULL,$1);
+	       if(strchr($1,'?') != NULL || strchr($1,'*') != NULL){
+	       	Command::_currentSimpleCommand->insertArgument( $1 );
+	       }
+	       else{
+	       	expandWildcards(NULL,$1);
+		}
 	}
 	;
 
@@ -349,7 +352,7 @@ void expandWildcards(char * prefix, char * suffix){
 	sortArrayStrings(array,nEntries);
 	int i = 0;
 	for(int i = 0;i < nEntries; i++){
-		printf("ARRAY is :%s\n",array[i]);
+		//printf("ARRAY is :%s\n",array[i]);
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	/*free(array);*/ 
