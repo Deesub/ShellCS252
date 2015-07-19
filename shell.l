@@ -152,7 +152,7 @@ void myunputc(int c) {
         j++;
 
 		// pass another exit to ensure exiting
-        char sExit[5] = "exit";
+        char sExit[6] = "exit\n";
         for(i = 0; sExit[i] != '\0'; i++){
             commands[j] = sExit[i];
             j++;
