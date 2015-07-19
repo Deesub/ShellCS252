@@ -348,8 +348,8 @@ void expandWildcards(char * prefix, char * suffix){
 	closedir(d);
 	sortArrayStrings(array,nEntries);
 	int i = 0;
-	for(int i = 0;i < nEntries; i++){
-		Command::_currentSimpleCommand->insertArgument(array[i]);
+	for(int i = 0;i < nEntries-1; i++){
+		Command::_currentSimpleCommand->insertArgument(array[i+1]);
 	}
 	/*free(array);*/ 
 	return;
