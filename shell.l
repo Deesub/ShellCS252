@@ -134,53 +134,6 @@ void myunputc(int c) {
 		perror("fork");
 		exit(1);
 	}
-	else{
-	
-	for(ctr = 0;ctr < strlen(cmd);ctr++){
-		write(1,cmd + ctr,1);
-	}
-	
-	dup2(tmpout,1);
-	close(tmpout);
-
-	close(fdpipec[0]);
-	close(fdpipec[1]);
-	close(fdpipep[0]);
-	close(fdpipep[1]);
-	
-
-
-	int c = 0;
-	char p = 0;
-	
-	while(read(0,&p,1) != 0)
-	{
-		if(p == '\n'){
-			buff[c] = ' ';
-		}
-		else
-		{
-		buff[c] = p;
-		}
-	c++;
-	}
-	dup2(tmpin,0);
-	close(tmpin);
-
-	close(fdpipec[0]);
-	close(fdpipec[1]);
-	close(fdpipep[0]);
-	close(fdpipep[1]);
-	}
-
-	waitpid(ret,NULL,0);
-	int d = 0;
-	int l = strlen(buff);
-	while(d < l){
-		unput(buff[l-d-1]);
-		d++;
-		
-	}
 
 
 }
