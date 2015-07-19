@@ -82,6 +82,7 @@ void myunputc(int c) {
 	}
 
  `[^\n`]*`	{
+ 	char buff[100];
 	char cmd[100];
 	int i = 0;
 	int j = 0;
@@ -116,7 +117,7 @@ void myunputc(int c) {
 	dup2(fdpipec[1],1);
 	close(fdpipec[1]);
 
-	/*int ret = fork();
+	int ret = fork();
 
 	if(ret == 0){
 		close(fdpipec[0]);
@@ -133,7 +134,38 @@ void myunputc(int c) {
 	else if(ret < 0){
 		perror("fork");
 		exit(1);
-	}*/
+	}
+	else{
+		while(ctr <= strlen(cmd)){
+			write(1,cmd+ctr,1);
+			ctr++;
+		}
+		int c = 0;
+		char ch = 0;
+		while(read(0,&ch,1)!=0){
+			if(ch == '\n')
+				buff[c] = ' ';
+			else
+				buff[c] = ch;
+		c++;
+		}		
+		buff[c] = '\0';
+		
+		dup2(tmpin,0);
+		close(tmpin);
+		dup2(tmpout,1);
+		close(tmpout);
+
+		close(fdpipec[0]);
+		close(fdpipec[1]);
+		close(fdpipep[0]);
+		close(fdpipep[1]);
+
+	}
+
+		
+
+	
 
 }
 	
