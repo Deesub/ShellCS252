@@ -111,7 +111,7 @@ void myunputc(int c) {
 		exit(1);
 	}
 	
-	int len = strlen(cmd);
+	/*int len = strlen(cmd);
 	while(ctr <= len){
 	write(1,cmd,1);
 	}
@@ -119,13 +119,10 @@ void myunputc(int c) {
 	dup2(fdpipep[0],0);
         close(fdpipep[0]);
 
-        // parent stdout to childPipe[1]
         dup2(fdpipec[1],1);
-        close(fdpipec[1]);
+        close(fdpipec[1]);*/
        
 	
-	
-	// fork the new process
     
                
  }	
