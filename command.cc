@@ -410,7 +410,7 @@ if(isatty(0)){
 }
 }
 
-void disp( int sig ){
+void sigIntHandler( int sig ){
 	fprintf(stderr,"\n");
 	Command::_currentCommand.prompt();
 }
@@ -441,7 +441,7 @@ main()
 	}
 	
 	struct sigaction signalAction1;
-	signalAction1.sa_handler = disp;
+	signalAction1.sa_handler = sigIntHandler;
 	sigemptyset(&signalAction1.sa_mask);
 	signalAction1.sa_flags = SA_RESTART;
 	int error1 = sigaction(SIGINT, &signalAction1, NULL );
