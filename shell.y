@@ -331,9 +331,10 @@ void expandWildcards(char * prefix, char * suffix){
 
 					}*/	
 	
-			else
+			else{
 			array[nEntries] = strdup(ent->d_name);
 			nEntries++;
+			}
 
 		}	
 
