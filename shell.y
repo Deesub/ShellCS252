@@ -295,7 +295,7 @@ void expandWildcards(char * prefix, char * suffix){
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
-		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
+		if(regexec(&re,ent->d_name,1,&fucboi,0)!= 0){
 			if(nEntries == maxEntries){
 				maxEntries*=2;
 				array = (char**)realloc(array,maxEntries * sizeof(char*));
