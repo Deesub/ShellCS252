@@ -135,7 +135,7 @@ void myunputc(int c) {
 		exit(1);
 	}
 	int len = 0;
-
+	/*
 	while(len <= strlen(cmd)){
 		write(1,cmd + len,1);
 		len ++;
@@ -151,7 +151,7 @@ void myunputc(int c) {
 		ctr++;
 	}
 	buff[ctr] = '\0';
-
+	*/
 	dup2(tmpin,0);
 	close(tmpin);
 	dup2(tmpout,1);
@@ -164,12 +164,12 @@ void myunputc(int c) {
 
 	waitpid(ret,NULL,0);
 
-	int c = 0;
+	/*int c = 0;
 	
 	while(c < ctr){
 		unput(buff[ctr-(c+1)]);
 		c++;
-	}
+	}*/
 
 }	
 
