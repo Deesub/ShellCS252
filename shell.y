@@ -34,7 +34,7 @@
 
 #define MAXFILENAME 1024
 
-
+void expandWildcards(char *,char *);
 void yyerror(const char * s);
 int yylex();
 
@@ -84,8 +84,8 @@ argument:
             /* printf("   Yacc: insert argument \"%s\"\n", $1); */
               
 	       
-	       Command::_currentSimpleCommand->insertArgument( $1 );
-	       
+	       /*Command::_currentSimpleCommand->insertArgument( $1 );*/
+	       expandWildcards(NULL,$1);
 	}
 	;
 
