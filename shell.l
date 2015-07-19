@@ -156,13 +156,13 @@ void myunputc(int c) {
 	while(read(0,&p,1) != 0)
 	{
 		if(p == '\n'){
-			buff[ctr] = ' ';
+			buff[c] = ' ';
 		}
 		else
 		{
-		buff[ctr] = p;
+		buff[c] = p;
 		}
-	ctr++;
+	c++;
 	}
 	dup2(tmpin,0);
 	close(tmpin);
@@ -175,9 +175,9 @@ void myunputc(int c) {
 
 	waitpid(ret,NULL,0);
 	int d = 0;
-
-	while(d < ctr){
-		unput(buff[ctr-d-1]);
+	int l = strlen(buff);
+	while(d < l){
+		unput(buff[l-d-1]);
 		d++;
 		
 	}
