@@ -292,10 +292,10 @@ void expandWildcards(char * prefix, char * suffix){
 	int maxEntries = 20;
 	int nEntries = 0;
 	char ** array = (char**)malloc(maxEntries*sizeof(char*));
-	
+	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
-		if(regexec(&re,ent->d_name,0,NULL,0)!=0){
+		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
 			if(nEntries == maxEntries){
 				maxEntries*=2;
 				array = (char**)realloc(array,maxEntries * sizeof(char*));
