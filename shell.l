@@ -126,32 +126,9 @@ void myunputc(int c) {
 	
 	
 	// fork the new process
-        int ret = fork();
-       
-        if(ret == 0){
-            // child stdin to childpipe[0]
-            dup2(fdpipec[0],0);
-            close(fdpipec[0]);
-           
-            // child output to parent so it can pass results back
-            dup2(fdpipep[1],1);
-            close(fdpipep[1]);
- 
-			// run the subshell
-            char *arguments[2];
-            arguments[0] = "shell";
-            arguments[1] = NULL;
-            execvp(arguments[0], arguments);
-           
-            perror("execvp");
-           
-            exit(1);
-        }else if(ret < 0){
-            perror("fork");
-            exit(1);
-        }
+    
                
-   }	
+ }	
 
 	
 
