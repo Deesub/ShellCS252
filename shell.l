@@ -79,7 +79,21 @@ void myunputc(int c) {
 		
 	}
 
+`[^\n`]*`	{
+	char cmd[100];
+	int i = 0;
+	int j = 0;
+	int ctr = 0;
+	while(yytext[i] != '\0'){
+		if(yytext[0] == '`'){	
+			cmd[j++] = yytext[i++];
+		}
+	}
+	cmd[j-1] = '\0';
 
+
+}	
+	
 
 	
 
