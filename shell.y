@@ -348,7 +348,7 @@ void expandWildcards(char * prefix, char * suffix){
 	for(int i = 0;i < nEntries; i++){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
-	free(array); 
+	/*free(array);*/ 
 	return;
 }
 
