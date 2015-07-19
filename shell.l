@@ -134,13 +134,22 @@ void myunputc(int c) {
 		perror("fork");
 		exit(1);
 	}
+	else{
 	int len = 0;
 	
-	/*while(len <= strlen(cmd)){
+	while(len <= strlen(cmd)){
 		write(1,cmd + len,1);
 		len ++;
-	}*/
+	}
 	
+	dup2(tmpout,1);
+	close(tmpout);
+
+	close(fdpipec[0]);
+	close(fdpipec[1]);
+	close(fdpipep[0]);
+	close(fdpipep[1]);
+
 	char ch = 0;
 
 	while(read(0,&ch,1) != 0){
@@ -154,14 +163,13 @@ void myunputc(int c) {
 	
 	dup2(tmpin,0);
 	close(tmpin);
-	dup2(tmpout,1);
-	close(tmpout);
 
 	close(fdpipec[0]);
 	close(fdpipec[1]);
 	close(fdpipep[0]);
 	close(fdpipep[1]);
-
+	
+	}
 	waitpid(ret,NULL,0);
 
 	int c = 0;
