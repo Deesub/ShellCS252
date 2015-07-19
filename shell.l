@@ -111,7 +111,7 @@ void myunputc(int c) {
 		exit(1);
 	}
 	
-	dup2(fdpipep[0],0);
+	/*dup2(fdpipep[0],0);
 	close(fdpipep[0]);
 
 	dup2(fdpipec[1],1);
@@ -126,7 +126,7 @@ void myunputc(int c) {
 		args[0] = "shell";
 		args[1] = NULL;
 
-		/*execvp(args[0],args);*/
+		execvp(args[0],args);
 		if(execvp(args[0],args)<0){
 			perror("execvp");
 			exit(1);
@@ -163,7 +163,7 @@ void myunputc(int c) {
 		close(fdpipep[0]);
 		close(fdpipep[1]);
 
-	}
+	}*/
 
 		
 
