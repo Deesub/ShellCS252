@@ -84,7 +84,7 @@ argument:
 	WORD {
             /* printf("   Yacc: insert argument \"%s\"\n", $1); */
               
-	       if(strchr($1,'?') != NULL || strchr($1,'*') != NULL){
+	       if(strchr($1,'?') == NULL || strchr($1,'*') == NULL){
 	       	Command::_currentSimpleCommand->insertArgument( $1 );
 	       }
 	       else{
