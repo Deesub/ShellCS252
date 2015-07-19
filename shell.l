@@ -96,11 +96,11 @@ void myunputc(int c) {
 	
 	int tmpin = dup(0);
 	int tmpout = dup(1);
-	int childPipe[2];
-	int parentPipe[2];
+	int fdpipec[2];
+	int fdpipep[2];
 
-	int fdc = pipe(childPipe);
-	int fdp = pipe(parentPipe);
+	int fdc = pipe(fdpipec);
+	int fdp = pipe(fdpipep);
 
 	if(fdc == -1){
 		perror("pipe");
@@ -110,26 +110,32 @@ void myunputc(int c) {
 		perror("pipe");
 		exit(1);
 	}
+	
+	int len = strlen(cmd);
+	while(ctr <= len){
+	write(1,cmd,1);
+	}
 
-
-	dup2(parentPipe[0],0);
-        close(parentPipe[0]);
+	dup2(fdpipep[0],0);
+        close(fdpipep[0]);
 
         // parent stdout to childPipe[1]
-        dup2(childPipe[1],1);
-        close(childPipe[1]);
+        dup2(fdpipec[1],1);
+        close(fdpipec[1]);
        
-		// fork the new process
+	
+	
+	// fork the new process
         int ret = fork();
        
         if(ret == 0){
             // child stdin to childpipe[0]
-            dup2(childPipe[0],0);
-            close(childPipe[0]);
+            dup2(fdpipec[0],0);
+            close(fdpipec[0]);
            
             // child output to parent so it can pass results back
-            dup2(parentPipe[1],1);
-            close(parentPipe[1]);
+            dup2(fdpipep[1],1);
+            close(fdpipep[1]);
  
 			// run the subshell
             char *arguments[2];
@@ -143,60 +149,9 @@ void myunputc(int c) {
         }else if(ret < 0){
             perror("fork");
             exit(1);
-        }else{
-            int count = 0;
-
-            for (count = 0; count <= strlen(cmd); count++)
-            {
-                write(1,cmd+count,1);
-            }
-
-            dup2(tmpout, 1);
-            close(tmpout);
-
-            close(parentPipe[1]);
-            close(parentPipe[0]);
-
-            close(childPipe[1]);
-            close(childPipe[0]);
-           
-            int k = 0;
-            char c = 0;   
-            while (read(0, &c, 1) != 0)
-            {
-                if (c == '\n')
-                {
-                    buffer[k] = ' ';
-                }
-                else
-                {
-                    //grow buffer if necessary
-                    buffer[k] = c;
-                }
-                k++;
-            }
-            buffer[k] = '\0';
-           
-            dup2(tmpin, 0);
-            close(tmpin);
-
-            close(parentPipe[1]);
-            close(parentPipe[0]);
-            close(childPipe[1]);
-            close(childPipe[0]);
         }
-       
-       
-        waitpid(ret, NULL, 0);
-       
-        int c = 0;
-        int length = strlen(buffer);
-        while (c < length)
-        {
-            unput(buffer[length - 1 - c]);
-            c++;
-        }
-    }	
+               
+   }	
 
 	
 
