@@ -52,15 +52,17 @@ SimpleCommand::insertArgument( char * argument )
 	if(strchr(argument,'$') != NULL){
 
 		for(i = 0; argument[i] != '\0';i++){
-			if(argument[i] ==  '$'){
-				i += 2;
+			if(argument[i] ==  '$' ){
+				if(argument[i+1] == '{'){
+					i += 2;
+				}
 				for(i;argument[i] != '}';i++){
 					env[j++] = argument[i];
 				}
 				k = j;
 				env[k] = '\0';
 				strcat(exp,getenv(env));
-				//free(env);
+				free(env);
 				j = 0;
 			}
 			else{ 
@@ -70,7 +72,7 @@ SimpleCommand::insertArgument( char * argument )
 				}
 				no[k] = '\0';
 				strcat(exp,no);
-				//free(no);
+				free(no);
 				count = 1;
 				i--;
 				j = 0;
