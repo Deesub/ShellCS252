@@ -194,7 +194,7 @@ background_optional:
 #define MAXFILENAME 1024
 void expandWildcards(char * prefix, char * suffix){
 	if(suffix[0] == 0){
-		Command::_currentSimpleCommand->insertArgument(strdup(prefix));
+		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
 		}
 	char * s = strchr(suffix, '/');
