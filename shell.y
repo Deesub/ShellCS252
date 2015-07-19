@@ -306,13 +306,13 @@ void expandWildcards(char * prefix, char * suffix){
 					if(arg[0] == '.'){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s%s",prefix,ent->d_name);
-							expandWildcards(newPrefix,suffix);
+							//expandWildcards(newPrefix,suffix);
 							array[nEntries] = strdup(ent->d_name);
 							nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
-							expandWildcards(newPrefix,suffix);
+							//expandWildcards(newPrefix,suffix);
 							array[nEntries] = strdup(ent->d_name);
 							nEntries++;
 						}
@@ -324,21 +324,21 @@ void expandWildcards(char * prefix, char * suffix){
 				else
 				{	if(prefix != NULL){
 							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
-							expandWildcards(newPrefix,suffix);
+							//expandWildcards(newPrefix,suffix);
 							array[nEntries] =strdup(ent->d_name);
 							nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
-							expandWildcards(newPrefix,suffix);
+							//expandWildcards(newPrefix,suffix);
 							array[nEntries] =strdup(ent->d_name);
 							nEntries++;
 						}
 						else{
 						}
-
+                                            
 				}	
-	
+				expandWildcards(newPrefix,suffix);
 			
 
 		}	
@@ -360,9 +360,9 @@ void sortArrayStrings(char ** arr,int num){
 	for(;i < num - 1;i++){
 		for(;j < num -1; j++){
 			if(strcmp(arr[j],arr[j+1]) > 0){
-			char * tmp = arr[j];
-			arr[j] = arr[j+1];
-			arr[j+1] = tmp;
+				char * tmp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = tmp;
 			}
 		}
 	}
