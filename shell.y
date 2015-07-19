@@ -236,7 +236,7 @@ void expandWildcards(char * prefix, char * suffix){
 	r++;
 
 	while(*a) {
-		if( *a == '?'){
+		if( *a == '*'){
 			*r = '.';
 			r++;
 			*r = '*';
@@ -295,7 +295,7 @@ void expandWildcards(char * prefix, char * suffix){
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
-			printf("fucboi: [%s]\n", ent->d_name);
+			//printf("fucboi: [%s]\n", ent->d_name);
 		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
 			if(nEntries == maxEntries){
 				maxEntries*=2;
