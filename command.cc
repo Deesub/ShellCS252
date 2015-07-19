@@ -77,7 +77,7 @@ SimpleCommand::insertArgument( char * argument )
 			}	
 	
 		}
-		argument = strdup(exp);
+		argument = exp;
 	}
 	if(len < 0){
 		_exit(1);
