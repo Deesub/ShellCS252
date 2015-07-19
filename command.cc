@@ -99,7 +99,7 @@ SimpleCommand::insertArgument( char * argument )
 	}
 
 	if(strchr(argument,'\\') != NULL){
-		for(i = 0;argument[i] !='\0';i++){
+		for(i = 0;argument[i] != '\0';i++){
 			if(argument[i] == '\\'){
 				i+=1;
 			}
@@ -410,7 +410,7 @@ if(isatty(0)){
 }
 }
 
-void sigIntHandler( int sig ){
+void disp( int sig ){
 	fprintf(stderr,"\n");
 	Command::_currentCommand.prompt();
 }
@@ -441,7 +441,7 @@ main()
 	}
 	
 	struct sigaction signalAction1;
-	signalAction1.sa_handler = sigIntHandler;
+	signalAction1.sa_handler = disp;
 	sigemptyset(&signalAction1.sa_mask);
 	signalAction1.sa_flags = SA_RESTART;
 	int error1 = sigaction(SIGINT, &signalAction1, NULL );

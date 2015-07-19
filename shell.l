@@ -58,6 +58,12 @@ void myunputc(int c) {
 		return PIPE;
 	}
 
+[^ \t\n|<>&]*\\[^ \t\n]* {
+	return WORD;
+
+}
+
+
 
 [^ \t\n|<>&][^ \t\n|<>&]*  {
 		/* Assume that file names have only alpha chars */
@@ -80,6 +86,7 @@ void myunputc(int c) {
 		return WORD;
 		
 	}
+
 
  `[^\n`]*`	{
  	char buffer[100];

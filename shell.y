@@ -316,6 +316,7 @@ void expandWildcards(char * prefix, char * suffix){
 						}
 
 					}
+					}
 					else
 					{	if(prefix != NULL){
 							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
@@ -330,7 +331,7 @@ void expandWildcards(char * prefix, char * suffix){
 
 					}	
 	
-			}
+			
 			array[nEntries] = strdup(ent->d_name);
 			nEntries++;
 
