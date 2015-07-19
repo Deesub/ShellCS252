@@ -111,10 +111,10 @@ void myunputc(int c) {
 		exit(1);
 	}
 	
-	/*dup2(fdpipep[0],0);
+	dup2(fdpipep[0],0);
 	close(fdpipep[0]);
 
-	dup2(fdpipec[1],1);
+	/*dup2(fdpipec[1],1);
 	close(fdpipec[1]);
 
 	int ret = fork();
