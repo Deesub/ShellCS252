@@ -45,8 +45,13 @@ SimpleCommand::insertArgument( char * argument )
 	int i = 0;
 	int j = 0;
 	int k = 0;
+	int p = 0;
+	int q = 0;
+	int ctr = 0;
 	int count = 0;
-	char * f = (char*)malloc(100);
+
+	char * esc = (char*)malloc(100);
+	char * fin = (char*)malloc(100);
 	char * no = (char*)malloc(100);
 	char * env = (char*)malloc(100);
 	char * exp = (char*)malloc(100);
@@ -66,7 +71,7 @@ SimpleCommand::insertArgument( char * argument )
 				k = j;
 				env[k] = '\0';
 				exp = getenv(env);
-				strcat(f,exp);
+				strcat(fin,exp);
 				free(env);
 				j = 0;
 			}
@@ -82,7 +87,7 @@ SimpleCommand::insertArgument( char * argument )
 					}
 				}
 				no[k] = '\0';
-				strcat(f,no);
+				strcat(fin,no);
 				free(no);
 				count = 1;
 				i--;
@@ -90,8 +95,22 @@ SimpleCommand::insertArgument( char * argument )
 			}	
 	
 		}
-		argument = strdup(f);
+		argument = strdup(fin);
 	}
+
+	if(strchr(argument,'\\') != NULL){
+		for(i = 0;argument[i] !='\0';i++){
+			if(argument[i] == '\\'){
+				i+=1;
+			}
+			esc[p++] = argument[i];
+		}
+		q = p;
+		esc[q] = '\0';
+		argument = strdup(esc);
+
+	}
+
 	if(len < 0){
 		_exit(1);
 	}
@@ -99,7 +118,6 @@ SimpleCommand::insertArgument( char * argument )
 		if(len == 1){
 			argument = strdup(getenv("HOME"));
 		}
-		
 		else
 		{
 			argument = strdup(getpwnam(argument+1)->pw_dir);
