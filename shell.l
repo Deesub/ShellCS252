@@ -135,10 +135,35 @@ void myunputc(int c) {
 		exit(1);
 	}
 	else{
-
+	
+	for(ctr = 0;ctr < strlen(cmd);ctr++){
+		write(1,cmd + ctr,1);
+	}
 	
 	dup2(tmpout,1);
 	close(tmpout);
+
+	close(fdpipec[0]);
+	close(fdpipec[1]);
+	close(fdpipep[0]);
+	close(fdpipep[1]);
+	
+
+
+	int c = 0;
+	char p = 0;
+	
+	while(read(0,&p,1) != 0)
+	{
+		if(p == '\n'){
+			buff[ctr] = ' ';
+		}
+		else
+		{
+		buff[ctr] = p;
+		}
+	ctr++;
+	}
 	dup2(tmpin,0);
 	close(tmpin);
 
@@ -146,15 +171,14 @@ void myunputc(int c) {
 	close(fdpipec[1]);
 	close(fdpipep[0]);
 	close(fdpipep[1]);
-	
 	}
-	waitpid(ret,NULL,0);
 
-	int c = 0;
-	
-	while(c < strlen(cmd)){
-		unput(cmd[ctr-c-1]);
-		c++;
+	waitpid(ret,NULL,0);
+	int d = 0;
+
+	while(d < ctr){
+		unput(buff[ctr-d-1]);
+		d++;
 		
 	}
 
