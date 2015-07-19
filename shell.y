@@ -261,7 +261,7 @@ void expandWildcards(char * prefix, char * suffix){
 	r++;
 	*r = 0;
 
-	/*
+	
 	int regco;
 	regex_t re;
 	regco = regcomp(&re,reg,0);
@@ -269,7 +269,7 @@ void expandWildcards(char * prefix, char * suffix){
 	if(regco!=0){
 	perror("BAD regex bro, better luck next time");
 	exit(1);
-	}*/
+	}
 
 	/*char * expbuf = compile(reg,expbuf,&expbuf[strlen(expbuf)],-1);
 
@@ -279,7 +279,6 @@ void expandWildcards(char * prefix, char * suffix){
 	}*/
 	
 	
-	/*
 	const char * dir;
 	if(prefix == NULL){
 		dir = ".";
@@ -344,62 +343,13 @@ void expandWildcards(char * prefix, char * suffix){
 
 	}
 	closedir(d);
-	sortArrayStrings(array,nEntries);
-	int i = 0;;
+	/*sortArrayStrings(array,nEntries);*/
+	int i = 0;
 	for(int i = 0;i < nEntries; i++){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	free(array); 
-	return;*/
-
-	regex_t temp;
-	int regSuccess;
-
-	regSuccess = regcomp(&temp, reg, 0);
-
-	// if not 0, regex can't be compiled
-	if (regSuccess) {
-		perror("compiling the regexizzle");
-		exit(1);
-	}
-
-
-	struct dirent ** dirlist;
-	int n;
-
-	if (prefix[0] == 0) {
-		n = scandir(".", &dirlist,0,alphasort);
-	}
-	else {
-		n = scandir(prefix, &dirlist,0,alphasort);
-	}
-	
-	// empty 
-	if (n < 0) { 
-		return; 
-	}
-	else {
-		int count = 0;
-		while (count < n) {
-			regSuccess = regexec(&temp, dirlist[count]->d_name, 0, NULL, 0);
-			if (!regSuccess) {
-				//printf("%s is a match.\n", ent->d_name);	
-
-				if (arg[0] == '.') {
-					sprintf(newPrefix, "%s/%s", prefix, dirlist[count]->d_name);
-					expandWildcards(newPrefix, suffix);
-				}
-				else {
-					if (dirlist[count]->d_name[0] == '.') {}
-					else {
-						sprintf(newPrefix, "%s/%s", prefix, dirlist[count]->d_name);
-						expandWildcards(newPrefix, suffix);
-					}
-				}
-			}
-			count++;
-		}
-	}
+	return;
 }
 
 void
