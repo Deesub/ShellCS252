@@ -366,7 +366,7 @@ void sortArrayStrings(char ** arr,int num){
 				char * tmp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = tmp;
-				boole = 0;
+				boole = 1;
 			}
 		}
 	}
