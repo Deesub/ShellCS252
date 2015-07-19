@@ -46,6 +46,7 @@ SimpleCommand::insertArgument( char * argument )
 	int j = 0;
 	int k = 0;
 	int count = 0;
+	char * f = (char*)malloc(100);
 	char * no = (char*)malloc(100);
 	char * env = (char*)malloc(100);
 	char * exp = (char*)malloc(100);
@@ -64,7 +65,8 @@ SimpleCommand::insertArgument( char * argument )
 				}
 				k = j;
 				env[k] = '\0';
-				strcat(exp,getenv(env));
+				exp = getenv(env);
+				strcat(f,exp);
 				free(env);
 				j = 0;
 			}
@@ -80,7 +82,7 @@ SimpleCommand::insertArgument( char * argument )
 					}
 				}
 				no[k] = '\0';
-				strcat(exp,no);
+				strcat(f,no);
 				free(no);
 				count = 1;
 				i--;
