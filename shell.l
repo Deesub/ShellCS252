@@ -13,7 +13,7 @@
 #include "y.tab.h"
 #include <unistd.h>
 #include <errno.h>
-
+#include <wait.h>
 
 static  void yyunput (int c,char *buf_ptr  );
 
@@ -79,8 +79,9 @@ void myunputc(int c) {
 		
 	}
 
-`[^\n`]*`	{
+ `[^\n`]*`	{
 	char cmd[100];
+	char buff[100];
 	int i = 0;
 	int j = 0;
 	int ctr = 0;
@@ -90,10 +91,88 @@ void myunputc(int c) {
 		}
 	}
 	cmd[j-1] = '\0';
+	
+	int tmpin = dup(0);
+	int tmpout = dup(1);
+	int fdpipec[2];
+	int fdpipep[2];
 
+	int fdc = pipe(fdpipec);
+	int fdp = pipe(fdpipep);
+
+	if(fdc == -1){
+		perror("pipe");
+		exit(1);
+	}
+	if(fdp == -1){
+		perror("pipe");
+		exit(1);
+	}
+	
+	dup2(fdpipep[0],0);
+	close(fdpipep[0]);
+
+	dup2(fdpipec[1],1);
+	close(fdpipec[1]);
+
+	int ret = fork();
+
+	if(ret == 0){
+		close(fdpipec[0]);
+
+		char *args[2];
+		args[0] = "shell";
+		args[1] = NULL;
+
+		execvp(args[0],args);
+		if(execvp(args[0],args) < 0){
+			perror("execvp");
+			exit(1);			
+		}
+	}
+	else if(ret < 0){
+		perror("fork");
+		exit(1);
+	}
+	int len = 0;
+
+	while(len <= strlen(cmd)){
+		write(1,cmd + len,1);
+		len ++;
+	}
+	
+	char ch = 0;
+
+	while(read(0,&ch,1) != 0){
+		if(ch == '\n')
+			buff[ctr] = ' ';
+		else
+			buff[ctr] = ch;
+		ctr++;
+	}
+	buff[ctr] = '\0';
+
+	dup2(tmpin,0);
+	close(tmpin);
+	dup2(tmpout,1);
+	close(tmpout);
+
+	close(fdpipec[0]);
+	close(fdpipec[1]);
+	close(fdpipep[0]);
+	close(fdpipep[1]);
+
+	waitpid(ret,NULL,0);
+
+	int c = 0;
+	
+	while(c < ctr){
+		unput(buff[ctr-(c+1)]);
+		c++;
+	}
 
 }	
-int	
+
 
 	
 
