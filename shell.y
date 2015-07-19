@@ -360,13 +360,13 @@ void sortArrayStrings(char ** arr,int num){
 	int j = 0;
 	int boole = 1;
 	do{
-		boole = 1;
+		boole = 0;
 		for(;j < num -1; j++){
 			if(strcmp(arr[j],arr[j+1]) > 0){
 				char * tmp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = tmp;
-				boole = 0;
+				boole = 1;
 			}
 		}
 	}
