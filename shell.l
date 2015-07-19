@@ -139,23 +139,6 @@ void myunputc(int c) {
 	
 	dup2(tmpout,1);
 	close(tmpout);
-
-	close(fdpipec[0]);
-	close(fdpipec[1]);
-	close(fdpipep[0]);
-	close(fdpipep[1]);
-
-	char ch = 0;
-
-	while(read(0,&ch,1) != 0){
-		if(ch == '\n')
-			buff[ctr] = ' ';
-		else
-			buff[ctr] = ch;
-		ctr++;
-	}
-	buff[ctr] = '\0';
-	
 	dup2(tmpin,0);
 	close(tmpin);
 
@@ -169,15 +152,14 @@ void myunputc(int c) {
 
 	int c = 0;
 	
-	while(c < ctr){
-		unput(buff[ctr-(c+1)]);
+	while(c < strlen(cmd)){
+		unput(cmd[ctr-c-1]);
 		c++;
+		
 	}
-	
-
-}	
 
 
+}
 	
 
 
