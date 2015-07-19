@@ -56,6 +56,9 @@ SimpleCommand::insertArgument( char * argument )
 				if(argument[i+1] == '{'){
 					i += 2;
 				}
+				else{
+
+				}
 				for(i;argument[i] != '}';i++){
 					env[j++] = argument[i];
 				}
@@ -67,8 +70,14 @@ SimpleCommand::insertArgument( char * argument )
 			}
 			else{ 
 				for(i;argument[i] != '$' && argument[i] != '\0';i++){
+					if(argument[i+1] == '{'){
+
+					}
+					else
+					{
 					no[j++] = argument[i];		
 					k = j;
+					}
 				}
 				no[k] = '\0';
 				strcat(exp,no);
