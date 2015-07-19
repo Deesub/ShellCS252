@@ -265,7 +265,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	int regco;
 	regex_t re;
-	regco = regcomp(&re,reg,0);
+	regco = regcomp(&re,reg,REG_EXTENDED | REG_NOSUB);
 
 	if(regco!=0){
 	perror("BAD regex bro, better luck next time");
