@@ -68,12 +68,12 @@ void myunputc(int c) {
 
 
 \"[^\n\"]*\"       {
-		/*int last = 0;
+		int last = 0;
 		char * st = strdup(yytext);
 			st++;
 		st[strlen(st) - 1] = 0;
 		yylval.string_val = st;
-		return WORD;*/ 
+		return WORD;
 		yylval.string_val = strdup(yytext+1);
 		yylval.string_val[strlen(yylval.string_val)-1] = 0;
 		return WORD;
@@ -81,7 +81,7 @@ void myunputc(int c) {
 	}
 
  `[^\n`]*`	{
-	char cmd[100];
+	/*char cmd[100];
 	int i = 0;
 	int j = 0;
 	int ctr = 0;
@@ -115,7 +115,7 @@ void myunputc(int c) {
 	dup2(fdpipec[1],1);
 	close(fdpipec[1]);
 
-	/*int ret = fork();
+	int ret = fork();
 
 	if(ret == 0){
 		close(fdpipec[0]);

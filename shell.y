@@ -271,12 +271,6 @@ void expandWildcards(char * prefix, char * suffix){
 	exit(1);
 	}
 
-	/*char * expbuf = compile(reg,expbuf,&expbuf[strlen(expbuf)],-1);
-
-	if(expbuf == NULL){
-		perror("compile");
-		return;
-	}*/
 	
 	
 	const char * dir;
