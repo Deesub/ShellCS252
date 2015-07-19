@@ -361,12 +361,12 @@ void sortArrayStrings(char ** arr,int num){
 	int boole = 1;
 	do{
 		boole = 0;
-		for(;j < num -1; j++){
+		for(j=0;j < num -1; j++){
 			if(strcmp(arr[j],arr[j+1]) > 0){
 				char * tmp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = tmp;
-				boole = 1;
+				boole = 0;
 			}
 		}
 	}
