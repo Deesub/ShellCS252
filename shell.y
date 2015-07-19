@@ -302,39 +302,44 @@ void expandWildcards(char * prefix, char * suffix){
 				assert(array!=NULL);
 			}
 			
-			if(ent->d_name[0] == '.'){
+				if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s%s",prefix,ent->d_name);
 							expandWildcards(newPrefix,suffix);
+							array[nEntries] = strdup(ent->d_name);
+							nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
 							expandWildcards(newPrefix,suffix);
+							array[nEntries] = strdup(ent->d_name);
+							nEntries++;
 						}
 						else{
 						}
 
 					}
-					}
-		/*			else
-					{	if(prefix != NULL){
+				}
+				else
+				{	if(prefix != NULL){
 							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
 							expandWildcards(newPrefix,suffix);
+							array[nEntries] =strdup(ent->d_name);
+							nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
 							expandWildcards(newPrefix,suffix);
+							array[nEntries] =strdup(ent->d_name);
+							nEntries++;
 						}
 						else{
 						}
 
-					}*/	
+				}	
 	
-			else{
-			array[nEntries] = strdup(ent->d_name);
-			nEntries++;
-			}
+			
 
 		}	
 
