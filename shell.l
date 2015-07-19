@@ -82,7 +82,7 @@ void myunputc(int c) {
 	}
 
  `[^\n`]*`	{
-	/*char cmd[100];
+	char cmd[100];
 	int i = 0;
 	int j = 0;
 	int ctr = 0;
@@ -116,7 +116,7 @@ void myunputc(int c) {
 	dup2(fdpipec[1],1);
 	close(fdpipec[1]);
 
-	int ret = fork();
+	/*int ret = fork();
 
 	if(ret == 0){
 		close(fdpipec[0]);
