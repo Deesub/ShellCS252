@@ -135,12 +135,7 @@ void myunputc(int c) {
 		exit(1);
 	}
 	else{
-	int len = 0;
-	
-	while(len <= strlen(cmd)){
-		write(1,cmd + len,1);
-		len ++;
-	}
+
 	
 	dup2(tmpout,1);
 	close(tmpout);
@@ -177,7 +172,7 @@ void myunputc(int c) {
 	while(c < ctr){
 		unput(buff[ctr-(c+1)]);
 		c++;
-		}
+	}
 	
 
 }	
