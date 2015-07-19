@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <wait.h>
 
+
 static  void yyunput (int c,char *buf_ptr  );
 
 void myunputc(int c) {
@@ -80,8 +81,6 @@ void myunputc(int c) {
 	}
 
  `[^\n`]*`	{
-	
-	/*
 	char cmd[100];
 	char buff[100];
 	int i = 0;
@@ -136,138 +135,8 @@ void myunputc(int c) {
 		perror("fork");
 		exit(1);
 	}
-	*/
-	char buffer[100];
-	 char *commands = (char*) malloc(sizeof(char) * 1024);
-        int i = 0;
-        int j = 0;
-        for(i = 0; yytext[i] != '\0'; i++){
-            if(yytext[i] == '`'){
-                continue;
-            }
-            commands[j] = yytext[i];
-            j++;
-        }
-        commands[j] = '\n';
-        j++;
 
-		// pass another exit to ensure exiting
-        char sExit[6] = "exit\n";
-        for(i = 0; sExit[i] != '\0'; i++){
-            commands[j] = sExit[i];
-            j++;
-        }
-        j++;
-        commands[j] = '\0';
-       
-        // preserve stdin and stdout
-        int tmpin = dup(0);
-        int tmpout = dup(1);
-       
-        // create pipe for transferring commands/results
-        int parentPipe[2];
-        int childPipe[2];
-       
-        if(pipe(parentPipe) == -1){
-            perror("pipe");
-            exit(2);
-        }
-        if(pipe(childPipe) == -1){
-            perror("pipe");
-            exit(2);
-        }   
-       
-       
-        // parent stdin to parentPipe[0]
-        dup2(parentPipe[0],0);
-        close(parentPipe[0]);
-
-        // parent stdout to childPipe[1]
-        dup2(childPipe[1],1);
-        close(childPipe[1]);
-       
-		// fork the new process
-        int ret = fork();
-       
-        if(ret == 0){
-            // child stdin to childpipe[0]
-            dup2(childPipe[0],0);
-            close(childPipe[0]);
-           
-            // child output to parent so it can pass results back
-            dup2(parentPipe[1],1);
-            close(parentPipe[1]);
- 
-			// run the subshell
-            char *arguments[2];
-            arguments[0] = "shell";
-            arguments[1] = NULL;
-            execvp(arguments[0], arguments);
-           
-            perror("execvp");
-           
-            exit(1);
-        }else if(ret < 0){
-            perror("fork");
-            exit(1);
-        }else{
-            int count = 0;
-
-            for (count = 0; count <= strlen(commands); count++)
-            {
-                write(1,commands+count,1);
-            }
-
-            dup2(tmpout, 1);
-            close(tmpout);
-
-            close(parentPipe[1]);
-            close(parentPipe[0]);
-
-            close(childPipe[1]);
-            close(childPipe[0]);
-           
-            int k = 0;
-            char c = 0;   
-            while (read(0, &c, 1) != 0)
-            {
-                if (c == '\n')
-                {
-                    buffer[k] = ' ';
-                }
-                else
-                {
-                    //grow buffer if necessary
-                    buffer[k] = c;
-                }
-                k++;
-            }
-            buffer[k] = '\0';
-           
-            dup2(tmpin, 0);
-            close(tmpin);
-
-            close(parentPipe[1]);
-            close(parentPipe[0]);
-            close(childPipe[1]);
-            close(childPipe[0]);
-        }
-       
-       
-        waitpid(ret, NULL, 0);
-       
-        int c = 0;
-        int length = strlen(buffer);
-        while (c < length)
-        {
-            unput(buffer[length - 1 - c]);
-            c++;
-        }
- }
-
-
-
-
+}
 	
 
 
