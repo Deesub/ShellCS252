@@ -110,6 +110,8 @@ void myunputc(int c) {
 		perror("pipe");
 		exit(1);
 	}
+	dup2(fdpipep[0],0);
+	close(fdpipep[0]);
 
 
 		
