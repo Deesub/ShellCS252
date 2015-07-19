@@ -127,8 +127,10 @@ void myunputc(int c) {
 		args[1] = NULL;
 
 		execvp(args[0],args);
+		if(execvp(args[0],args)<0){
 			perror("execvp");
-			exit(1);			
+			exit(1);
+		}
 		
 	}
 	else if(ret < 0){
