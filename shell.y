@@ -34,6 +34,7 @@
 
 #define MAXFILENAME 1024
 
+void sortArrayStrings(char **,int);
 void expandWildcards(char *,char *);
 void yyerror(const char * s);
 int yylex();
@@ -337,13 +338,27 @@ void expandWildcards(char * prefix, char * suffix){
 
 	}
 	closedir(d);
-	/*sortArrayStrings(array,nEntries);*/
+	sortArrayStrings(array,nEntries);
 	int i = 0;
 	for(int i = 0;i < nEntries; i++){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	/*free(array);*/ 
 	return;
+}
+
+void sortArrayStrings(char ** arr,int num){
+	int i = 0;
+	int j = 0;
+	for(;i < num - 1;i++){
+		for(;j < num -1; j++){
+			if(strcmp(arr[j],arr[j+1]) > 0){
+			char * tmp = arr[j];
+			arr[j] = arr[j+1];
+			arr[j+1] = tmp;
+			}
+		}
+	}
 }
 
 void
