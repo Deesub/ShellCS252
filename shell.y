@@ -319,7 +319,7 @@ void expandWildcards(char * prefix, char * suffix){
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
-							printf("Prefix : [%s]\n",prefix);
+							printf("Prefixcunt : [%s]\n",prefix);
 							//expandWildcards(newPrefix,suffix);
 							array[nEntries] = strdup(ent->d_name);
 							nEntries++;
