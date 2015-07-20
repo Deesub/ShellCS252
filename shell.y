@@ -227,7 +227,7 @@ void expandWildcards(char * prefix, char * suffix){
 			expandWildcards(newPrefix,suffix);
 		}
 		if(prefix[0] =='/'){
-			sprintf(newPrefix,"/%s",arg);
+			sprintf(newPrefix,"%s/%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
 
