@@ -257,7 +257,7 @@ void expandWildcards(char * prefix, char * suffix){
 		return;
 	}
 	
-	printf("Prefix : [%s]\n",arg);
+	printf("Prefix : [%s]\n",prefix);
 	printf("suffix : [%s]\n",suffix);
 
 	char * reg = (char*)malloc(2*strlen(arg) + 10);
