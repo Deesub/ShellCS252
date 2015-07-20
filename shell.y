@@ -259,7 +259,7 @@ void expandWildcards(char * prefix, char * suffix){
 		else if(arg[0] == '\0'){
 			expandWildcards("",suffix);
 		}
-		return;
+		//return;
 	}
 	
 	printf("Prefix : [%s]\n",prefix);
