@@ -315,7 +315,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	 char * dir;
 	if(prefix == NULL){
-		dir = ".";
+		dir = strdup(".");
 	}
 	else
 	{
