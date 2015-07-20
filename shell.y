@@ -228,7 +228,7 @@ void expandWildcards(char * prefix, char * suffix){
 			expandWildcards(newPrefix,suffix);
 		}
 		if(arg[0] == '\0'){
-			expandWildcards("",suffix);
+			expandWildcards(" ",suffix);
 		}
 		return;
 	}
