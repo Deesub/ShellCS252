@@ -246,6 +246,10 @@ void expandWildcards(char * prefix, char * suffix){
 			expandWildcards(newPrefix,suffix);
 			//printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
 		}
+		if(prefix[0] == '/' && arg != NULL){
+			sprintf(newPrefix,"/%s",arg);
+			expandWildcards(newPrefix,suffix);		
+		}
 		/*if(prefix[0] =='/'){
 			sprintf(newPrefix,"%s/%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
