@@ -290,6 +290,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	DIR * d = opendir(dir);
 	if(d == NULL){
+		perror("OPENDIR");
 		return;
 	}
 
@@ -313,13 +314,13 @@ void expandWildcards(char * prefix, char * suffix){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s%s",prefix,ent->d_name);
 							//expandWildcards(newPrefix,suffix);
-							printf("Prefix : [%s]\n",prefix);
+							//printf("Prefix : [%s]\n",prefix);
 							array[nEntries] = strdup(ent->d_name);
 							nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
-							printf("Prefixcunt : [%s]\n",prefix);
+							//printf("Prefixcunt : [%s]\n",prefix);
 							//expandWildcards(newPrefix,suffix);
 							array[nEntries] = strdup(ent->d_name);
 							nEntries++;
