@@ -202,10 +202,7 @@ void expandWildcards(char * prefix, char * suffix){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
 		}
-	char * s;
-	if (suffix[0] != '/') {
-	 s = strchr(suffix, '/');
-	}
+	char * s  = strchr(suffix, '/');
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
