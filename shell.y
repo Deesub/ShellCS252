@@ -211,6 +211,7 @@ void expandWildcards(char * prefix, char * suffix){
 			arg[0] = '/';
 		//printf("AFTER:[%s]\n",arg);
 		}
+		suffix = s+1;
 		//suffix ++;
 	}
 	else{
