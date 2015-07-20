@@ -72,6 +72,7 @@ void myunputc(int c) {
 		{
 		escape[j] = yytext[i];
 		j++;
+		i++;
 		}
 	}
 	yylval.string_val = strdup(escape);
