@@ -207,9 +207,9 @@ void expandWildcards(char * prefix, char * suffix){
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
 		if(s-suffix == 0){
-		printf("BEF:[%s]\n",suffix);
+		printf("BEF:[%s]\n",arg);
 			arg[0] = '/';
-			printf("AFTER:[%s]\n",suffix);
+			printf("AFTER:[%s]\n",arg);
 		}
 		suffix = s+1;
 	}
