@@ -236,7 +236,7 @@ void expandWildcards(char * prefix, char * suffix){
 			expandWildcards(newPrefix,suffix);
 		}
 		else if(prefix[0] == '\0' && arg[0] != '\0'){
-			sprintf(newPrefix,"%s/%s",arg);
+			sprintf(newPrefix,"%s/%s",suffix,arg);
 			expandWildcards(newPrefix,suffix);
 			printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
 		}
