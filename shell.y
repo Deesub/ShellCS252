@@ -231,9 +231,9 @@ void expandWildcards(char * prefix, char * suffix){
 			expandWildcards(newPrefix,suffix);
 		}
 
-		/*if(arg[0] == '\0'){
-			expandWildcards(" ",suffix);
-		}*/
+		if(arg[0] == '\0'){
+			expandWildcards("",suffix);
+		}
 		return;
 	}
 	
@@ -294,7 +294,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	DIR * d = opendir(dir);
 	if(d == NULL){
-		perror("OPENDIR");
+		//perror("OPENDIR");
 		return;
 	}
 
