@@ -65,7 +65,7 @@ void myunputc(int c) {
 	for(i = 0;yytext[i] != '\0';i++){
 		if(yytext[i] == '\\'){
 			if(yytext[i+1] = '\\'){
-				escape[j] = yytext[i+1];
+				escape[j] = yytext[i+2];
 				i+=2;
 				j++;
 			}
