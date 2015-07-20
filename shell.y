@@ -198,6 +198,8 @@ background_optional:
 %%
 
 void expandWildcards(char * prefix, char * suffix){
+
+	int flag = 0;
 	//printf("Pref: [%s] Suff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
@@ -392,7 +394,17 @@ void expandWildcards(char * prefix, char * suffix){
 				}	
 				expandWildcards(newPrefix,suffix);
 				array[nEntries] =strdup(newPrefix);
-				nEntries++;			
+				nEntries++;
+				int k = 0;
+				for(k = 0;k < nEntries;k++){
+					if(strcmp(array[k],newPrefix) == 0){
+						flag = 1;
+						break;
+					}
+					else{
+						flag = 0;
+					}
+				}			
 
 		}	
 
@@ -411,11 +423,12 @@ void expandWildcards(char * prefix, char * suffix){
 	}*/
 	
 		for(i = 0;i < nEntries;i++){
+			if(flag == 0){
 			Command::_currentSimpleCommand->insertArgument(array[i]);
-			/*if(!isprint(array[i])){
-				array[i] = '\0';
-				break;
-			}*/
+			}
+			else{
+			exit(1);
+			}
 		}
 	
 	/*free(array);*/ 
