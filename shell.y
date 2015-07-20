@@ -377,16 +377,16 @@ void expandWildcards(char * prefix, char * suffix){
 	closedir(d);
 	sortArrayStrings(array,nEntries);
 	int i = 0;int j = 0;
-	for(int i = 0;i < nEntries; i++){
 		//printf("ARRAY is :%s\n",array[i]);
 		char ** tri = array;
-		if(array[i][0] == '/' && array[i][1] == '/'){
+		if(array[0][0] == '/' && array[0][1] == '/'){
 
-		for(j = 1 ;tri[j] != '\0';j++){
+		for(j = 1 ;j < nEntries;j++){
 		Command::_currentSimpleCommand->insertArgument(tri[j]);
 		}
 	}
 	else{
+		for(i = 0;i < nEntries;i++){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	}
