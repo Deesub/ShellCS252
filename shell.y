@@ -280,7 +280,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	
 	const char * dir;
-	if(prefix == NULL){
+	if(prefix[0] == '\0'){
 		dir = ".";
 	}
 	else
