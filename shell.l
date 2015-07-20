@@ -76,7 +76,7 @@ void myunputc(int c) {
 		i++;
 		}
 	}
-	yylval.string_val = strdup(escape);
+	yylval.string_val = strdup(yytext);
 	return WORD;
 
 }
