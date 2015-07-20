@@ -32,7 +32,7 @@
 #include <regex.h>
 #include <sys/types.h>
 
-#define MAXFILENAME 1024
+#define MAXFILENAME 10000
 
 void sortArrayStrings(char **,int);
 void expandWildcards(char *,char *);
@@ -194,7 +194,7 @@ background_optional:
 
 %%
 
-#define MAXFILENAME 1000
+#define MAXFILENAME 10000
 void expandWildcards(char * prefix, char * suffix){
 	//printf("Pref: [%s] Suff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
@@ -219,11 +219,11 @@ void expandWildcards(char * prefix, char * suffix){
 	c = strchr(arg,'?');
 
 	if(b == NULL && c == NULL){
-		if( prefix[0] == '\0' && arg[0] != '\0'){
+		if( prefix == NULL && arg[0] != '\0'){
 			sprintf(newPrefix,"%s%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
-		else if(prefix[0] == '/' && arg[0] != '\0'){
+		else if(prefix != NULL && prefix[0] == '\0' && arg[0] != '\0'){
 			sprintf(newPrefix,"/%s",arg);
 			expandWildcards(newPrefix,suffix);
 		}
