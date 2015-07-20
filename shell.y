@@ -23,6 +23,7 @@
 
 #define yylex yylex
 
+#include <ctype.h>
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
@@ -331,7 +332,7 @@ void expandWildcards(char * prefix, char * suffix){
 	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
-	char ** array = (char**)malloc(maxEntries*sizeof(char*));
+	char ** array = (char**)malloc(1000*maxEntries*sizeof(char*));
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
@@ -339,7 +340,7 @@ void expandWildcards(char * prefix, char * suffix){
 			//printf("fucboi: [%s]\n", ent->d_name);
 			if(nEntries == maxEntries){
 				maxEntries*=2;
-				array = (char**)realloc(array,maxEntries * sizeof(char*));
+				array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
 				assert(array!=NULL);
 			}
 			
@@ -410,8 +411,12 @@ void expandWildcards(char * prefix, char * suffix){
 	}*/
 	
 		for(i = 0;i < nEntries;i++){
-		Command::_currentSimpleCommand->insertArgument(array[i]);
-	}
+			Command::_currentSimpleCommand->insertArgument(array[i]);
+			/*if(!isprint(array[i])){
+				array[i] = '\0';
+				break;
+			}*/
+		}
 	
 	/*free(array);*/ 
 	return;
