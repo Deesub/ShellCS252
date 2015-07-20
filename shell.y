@@ -236,7 +236,7 @@ void expandWildcards(char * prefix, char * suffix){
 			expandWildcards(newPrefix,suffix);
 		}
 		else if(prefix[0] == '\0' && arg[0] != '\0'){
-			sprintf(newPrefix,"%s",arg);
+			sprintf(newPrefix,"%s/%s",arg);
 			expandWildcards(newPrefix,suffix);
 			printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
 		}
@@ -375,7 +375,7 @@ void expandWildcards(char * prefix, char * suffix){
 	sortArrayStrings(array,nEntries);
 	int i = 0;
 	for(int i = 0;i < nEntries; i++){
-		//printf("ARRAY is :%s\n",array[i]);
+		printf("ARRAY is :%s\n",array[i]);
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 	}
 	/*free(array);*/ 
