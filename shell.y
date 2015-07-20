@@ -88,7 +88,7 @@ argument:
 			Command::_currentSimpleCommand->insertArgument($1);
 		}
 	        else {
-	 	      	expandWildcards(NULL,$1);
+	 	      	expandWildcards("",$1);
 		}
 	}
 	;
@@ -219,12 +219,12 @@ void expandWildcards(char * prefix, char * suffix){
 	c = strchr(arg,'?');
 
 	if(b == NULL && c == NULL){
-		if( prefix  == NULL && arg[0] != '\0'){
+		if( prefix[0] == NULL && arg[0] != '\0'){
 			sprintf(newPrefix,"%s%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
-		else if(prefix != NULL && arg[0] != '\0'){
-			sprintf(newPrefix,"%s",arg);
+		else if(prefix[0] == '/' && arg[0] != '\0'){
+			sprintf(newPrefix,"/%s",arg);
 			expandWildcards(newPrefix,suffix);
 		}
 		/*if(arg[0] == '\0'){
@@ -280,7 +280,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	
 	const char * dir;
-	if(prefix[0] == '\0'){
+	if(prefix == NULL){
 		dir = ".";
 	}
 	else
