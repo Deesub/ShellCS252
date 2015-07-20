@@ -94,7 +94,7 @@ void myunputc(int c) {
 	int i = 0;
 	int j = 0;
 	char * escape = (char*)malloc(100);
-	for(i = 0;yytext[i] != '\0';i++){
+	while(yytext[i] != '/0'){
 		if(yytext[i] == '\\'){
 				i+=1;
 				escape[j] = yytext[i];
@@ -107,6 +107,7 @@ void myunputc(int c) {
 		j++;
 		i++;
 		}
+		i++;
 	}
 	yylval.string_val = strdup(yytext);
 	return WORD;
