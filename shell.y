@@ -208,10 +208,11 @@ void expandWildcards(char * prefix, char * suffix){
 		strncpy(arg,suffix,s-suffix);
 		if(s-suffix == 0){
 		//printf("BEF:[%s]\n",arg);
-			//arg[0] = '/';
-			//printf("AFTER:[%s]\n",arg);
+			arg[0] = '/';
+			suffix = s+1;
+		//printf("AFTER:[%s]\n",arg);
 		}
-		suffix = s+1;
+		//suffix = s+1;
 	}
 	else{
 		strcpy(arg,suffix);
