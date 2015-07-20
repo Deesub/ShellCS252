@@ -227,9 +227,9 @@ void expandWildcards(char * prefix, char * suffix){
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
 		}
-		if(arg[0] == '\0'){
+		/*if(arg[0] == '\0'){
 			expandWildcards(" ",suffix);
-		}
+		}*/
 		return;
 	}
 	
