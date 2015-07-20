@@ -220,8 +220,8 @@ void expandWildcards(char * prefix, char * suffix){
 		suffix = suffix + strlen(suffix);
 	}
 
-	printf("Prefix : [%s]\n",arg);
-	printf("suffix : [%s]\n",suffix);
+	//printf("Prefix : [%s]\n",arg);
+	//printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
@@ -257,6 +257,8 @@ void expandWildcards(char * prefix, char * suffix){
 		return;
 	}
 	
+	printf("Prefix : [%s]\n",arg);
+	printf("suffix : [%s]\n",suffix);
 
 	char * reg = (char*)malloc(2*strlen(arg) + 10);
 	char * a = arg;
