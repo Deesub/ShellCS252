@@ -364,7 +364,7 @@ void expandWildcards(char * prefix, char * suffix){
 				else
 				{	if(prefix != NULL){
 							
-							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
+							sprintf(newPrefix,"%s/%s",prefix, ent->d_name);
 							
 							//expandWildcards(newPrefix,suffix);
 							//printf("Prefix : [%s]\n",prefix);
