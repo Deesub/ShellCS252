@@ -9,18 +9,50 @@
 
 %{
 
+
 #include <string.h>
 #include "y.tab.h"
 #include <unistd.h>
 #include <errno.h>
 #include <wait.h>
+#include <stdio.h>
+/*
+extern "C" {
+char * read_line();
+}
+
+int mygetc(FILE * f) {
+  static char *p;
+  char ch;
+
+  if (!isatty(0)) {
+    // stdin is not a tty. Call real getc
+    return getc(f);
+  }
+
+  // stdin is a tty. Call our read_line.
+
+  if (p==NULL || *p == 0) {
+    char * s = read_line();
+    p = s;
+  }
+
+  ch = *p;
+  p++;
+
+  return ch;
+}
+
+#undef getc
+#define getc(f) mygetc(f)
+*/
 
 
-static  void yyunput (int c,char *buf_ptr  );
+/*static  void yyunput (int c,char *buf_ptr  );
 
 void myunputc(int c) {
     unput(c);
-}
+}*/
 
 
 %}
