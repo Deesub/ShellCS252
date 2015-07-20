@@ -333,7 +333,7 @@ void expandWildcards(char * prefix, char * suffix){
 	int nEntries = 0;
 	char ** array = (char**)malloc(maxEntries*sizeof(char*));
 	regmatch_t fucboi;
-	while((ent = readdir(d))!=NULL){
+	while(0){//while((ent = readdir(d))!=NULL){
 	
 		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
 			//printf("fucboi: [%s]\n", ent->d_name);
