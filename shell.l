@@ -64,8 +64,9 @@ void myunputc(int c) {
 	char * escape = (char*)malloc(100);
 	for(i = 0;yytext[i] != '\0';){
 		if(yytext[i] == '\\'){
-				escape[j] = yytext[i+1];
-				i+=2;
+				i+=1;
+				escape[j] = yytext[i];
+				i+=1;
 				j++;
 		}
 		else
