@@ -242,7 +242,7 @@ void expandWildcards(char * prefix, char * suffix){
 		}
 
 		else if(prefix != NULL  && arg[0] != '\0'){
-			if(prefix[strlen(prefix) - 1] == '/'){
+			if(prefix[0] != '\0' && prefix[strlen(prefix) - 1] == '/'){
 				prefix[strlen(prefix) -1] = '\0';			
 			}
 			sprintf(newPrefix,"%s/%s",prefix,arg);
@@ -366,7 +366,9 @@ void expandWildcards(char * prefix, char * suffix){
 				}
 				else
 				{	if(prefix != NULL){
-							
+							if(prefix[0]!= '\0' && prefix[strlen(prefix)-1] == '/'){
+								prefix[strlen(prefix) -1] = '\0';
+							}
 							sprintf(newPrefix,"%s/%s",prefix, ent->d_name);
 							
 							//expandWildcards(newPrefix,suffix);
