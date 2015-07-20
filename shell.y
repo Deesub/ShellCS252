@@ -206,6 +206,9 @@ void expandWildcards(char * prefix, char * suffix){
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
+		if(s-suffix == 0){
+			arg[0] = '/';
+		}
 		suffix = s+1;
 	}
 	else{
