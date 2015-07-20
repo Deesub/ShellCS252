@@ -313,13 +313,13 @@ void expandWildcards(char * prefix, char * suffix){
 
 	
 	
-	const char * dir;
+	 char * dir;
 	if(prefix == NULL){
 		dir = ".";
 	}
 	else
 	{
-		dir = prefix;
+		dir = strdup(prefix);
 	}
 	
 	DIR * d = opendir(dir);
@@ -396,6 +396,7 @@ void expandWildcards(char * prefix, char * suffix){
 
 	}
 	closedir(d);
+	free(dir);
 	sortArrayStrings(array,nEntries);
 	int i = 0;int j = 0;
 		//printf("ARRAY is :%s\n",array[i]);
