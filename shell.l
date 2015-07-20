@@ -58,7 +58,7 @@ void myunputc(int c) {
 		return PIPE;
 	}
 
-[^ \t\n|<>&]*\\[^ \t\n]* {
+[^ \t\n|\\<>&]*\\[^ \t\n]* {
 	int i = 0;
 	int j = 0;
 	char * escape = (char*)malloc(100);
