@@ -206,9 +206,9 @@ void expandWildcards(char * prefix, char * suffix){
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
-	/*	if(s-suffix == 0){
+		if(s-suffix == 0){
 			arg[0] = '/';
-		}*/
+		}
 		suffix = s+1;
 	}
 	else{
@@ -235,11 +235,11 @@ void expandWildcards(char * prefix, char * suffix){
 			sprintf(newPrefix,"%s/%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
-		/*else if(prefix[0] == '\0' && arg[0] != '\0'){
+		else if(prefix[0] == '\0' && arg[0] != '\0'){
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
 			printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
-		}*/
+		}
 		/*if(prefix[0] =='/'){
 			sprintf(newPrefix,"%s/%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
