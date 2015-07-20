@@ -197,7 +197,7 @@ background_optional:
 %%
 
 void expandWildcards(char * prefix, char * suffix){
-	//printf("Pref: [%s] Suff: [%s]\n", prefix, suffix);
+	printf("Pref: [%s] Suff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
@@ -221,7 +221,7 @@ void expandWildcards(char * prefix, char * suffix){
 	char * c;
 	b = strchr(arg,'*');
 	c = strchr(arg,'?');
-	//printf("ARG : [%s]\n",arg);
+	printf("ARG : [%s]\n",arg);
 	if(b == NULL && c == NULL){
 		if( prefix == NULL && arg[0] != '\0'){
 			
