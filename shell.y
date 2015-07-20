@@ -209,7 +209,7 @@ void expandWildcards(char * prefix, char * suffix){
 		if(s-suffix == 0){
 			arg[0] = '/';
 		}
-		suffix = s+1;
+		suffix = s+2;
 	}
 	else{
 		strcpy(arg,suffix);
