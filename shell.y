@@ -376,10 +376,19 @@ void expandWildcards(char * prefix, char * suffix){
 	}
 	closedir(d);
 	sortArrayStrings(array,nEntries);
-	int i = 0;
+	int i = 0;int j = 0;
 	for(int i = 0;i < nEntries; i++){
 		//printf("ARRAY is :%s\n",array[i]);
+		char ** tri = array;
+		if(array[i][1] == '/'){
+			tri++;
+		for(j = 0;tri[j] != '\0';j++){
+		Command::_currentSimpleCommand->insertArgument(tri[i]);
+		}
+	}
+	else{
 		Command::_currentSimpleCommand->insertArgument(array[i]);
+	}
 	}
 	/*free(array);*/ 
 	return;
