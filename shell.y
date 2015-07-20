@@ -207,9 +207,9 @@ void expandWildcards(char * prefix, char * suffix){
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
 		if(s-suffix == 0){
-		printf("BEF:[%s]\n",arg);
+		//printf("BEF:[%s]\n",arg);
 			arg[0] = '/';
-			printf("AFTER:[%s]\n",arg);
+			//printf("AFTER:[%s]\n",arg);
 		}
 		suffix = s+1;
 	}
@@ -223,7 +223,7 @@ void expandWildcards(char * prefix, char * suffix){
 	char * c;
 	b = strchr(arg,'*');
 	c = strchr(arg,'?');
-	printf("NEWPREF: [%s] SUFF: [%s]\n",newPrefix,suffix);
+	//printf("NEWPREF: [%s] SUFF: [%s]\n",newPrefix,suffix);
 	//printf("ARG : [%s]\n",arg);
 	if(b == NULL && c == NULL){
 		if( prefix == NULL && arg[0] != '\0'){
@@ -240,7 +240,7 @@ void expandWildcards(char * prefix, char * suffix){
 		else if(prefix[0] == '\0' && arg[0] != '\0'){
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
-			printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
+			//printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
 		}
 		/*if(prefix[0] =='/'){
 			sprintf(newPrefix,"%s/%s",prefix,arg);
