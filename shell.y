@@ -219,9 +219,7 @@ void expandWildcards(char * prefix, char * suffix){
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 	}
-	if(strcmp(arg, "/") == 0) {
-		strcpy(arg, "");
-	}
+
 	printf("Prefix : [%s]\n",arg);
 	printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
@@ -360,14 +358,17 @@ void expandWildcards(char * prefix, char * suffix){
 				{	if(prefix != NULL){
 							
 							sprintf(newPrefix,"%s%s",prefix, ent->d_name);
+							
 							//expandWildcards(newPrefix,suffix);
-							printf("Prefix : [%s]\n",newPrefix);
+							printf("Prefix : [%s]\n",prefix);
+							printf("ent->d_name : [%s]\n",ent->d_name);
 							array[nEntries] =strdup(newPrefix);
 							nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
-							printf("Prefix : [%s]\n",newPrefix);
+							printf("Prefix : [%s]\n",prefix);
+							printf("ent->d_name : [%s]\n",ent->d_name);
 							//expandWildcards(newPrefix,suffix);
 							array[nEntries] =strdup(newPrefix);
 							nEntries++;
