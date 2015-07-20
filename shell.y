@@ -87,8 +87,10 @@ argument:
 		if(strchr($1,'*') == NULL && strchr($1,'?') == NULL){
 			Command::_currentSimpleCommand->insertArgument($1);
 		}
-	        else {
-	 	      	expandWildcards(NULL,$1);
+	        else {	
+		char *st =(char*)malloc(3);
+		st[0] = '\0';
+	 	      	expandWildcards(st,$1);
 		}
 	}
 	;
