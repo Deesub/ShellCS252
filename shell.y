@@ -429,6 +429,7 @@ void expandWildcards(char * prefix, char * suffix){
 			else{
 			array[i] = '\0';
 			Command::_currentSimpleCommand->insertArgument(array[i]);
+			break;
 			}
 		}
 	
