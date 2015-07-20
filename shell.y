@@ -380,10 +380,10 @@ void expandWildcards(char * prefix, char * suffix){
 	for(int i = 0;i < nEntries; i++){
 		//printf("ARRAY is :%s\n",array[i]);
 		char ** tri = array;
-		if(array[i][1] == '/'){
-			tri++;
-		for(j = 0;tri[j] != '\0';j++){
-		Command::_currentSimpleCommand->insertArgument(tri[i]);
+		if(array[i][0] == '/' && array[i][1] == '/'){
+
+		for(j = 1 ;tri[j] != '\0';j++){
+		Command::_currentSimpleCommand->insertArgument(tri[j]);
 		}
 	}
 	else{
