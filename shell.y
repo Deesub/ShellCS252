@@ -242,6 +242,9 @@ void expandWildcards(char * prefix, char * suffix){
 		}
 
 		else if(prefix != NULL  && arg[0] != '\0'){
+			if(prefix[strlen(prefix) - 1] == '/'){
+				prefix[strlen(prefix) -1] = '/0';			
+			}
 			sprintf(newPrefix,"%s/%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
