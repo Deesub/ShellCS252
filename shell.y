@@ -219,7 +219,7 @@ void expandWildcards(char * prefix, char * suffix){
 	c = strchr(arg,'?');
 
 	if(b == NULL && c == NULL){
-		if( prefix[0] == NULL && arg[0] != '\0'){
+		if( prefix[0] == '\0' && arg[0] != '\0'){
 			sprintf(newPrefix,"%s%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
@@ -227,6 +227,7 @@ void expandWildcards(char * prefix, char * suffix){
 			sprintf(newPrefix,"/%s",arg);
 			expandWildcards(newPrefix,suffix);
 		}
+
 		/*if(arg[0] == '\0'){
 			expandWildcards(" ",suffix);
 		}*/
