@@ -374,23 +374,24 @@ void expandWildcards(char * prefix, char * suffix){
 							//expandWildcards(newPrefix,suffix);
 							//printf("Prefix : [%s]\n",prefix);
 							//printf("ent->d_name : [%s]\n",ent->d_name);
-							array[nEntries] =strdup(newPrefix);
-							nEntries++;
+							//array[nEntries] =strdup(newPrefix);
+							//nEntries++;
 						}
 						else if(prefix == NULL){
 							sprintf(newPrefix,"%s",ent->d_name);
 							//printf("Prefix : [%s]\n",prefix);
 							//printf("ent->d_name : [%s]\n",ent->d_name);
 							//expandWildcards(newPrefix,suffix);
-							array[nEntries] =strdup(newPrefix);
-							nEntries++;
+							//array[nEntries] =strdup(newPrefix);
+							//nEntries++;
 						}
 						else{
 						}
                                             
 				}	
 				expandWildcards(newPrefix,suffix);
-			
+				array[nEntries] =strdup(newPrefix);
+				nEntries++;			
 
 		}	
 
