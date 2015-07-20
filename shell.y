@@ -219,6 +219,9 @@ void expandWildcards(char * prefix, char * suffix){
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 	}
+	if(strcmp(arg, "/") == 0) {
+		strcpy(arg, "");
+	}
 	printf("Prefix : [%s]\n",arg);
 	printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
