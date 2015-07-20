@@ -66,7 +66,7 @@ void myunputc(int c) {
 		if(yytext[i] == 92){ 
 			if(yytext[i+1] == 92){
 			escape[j] = yytext[i+1];
-			i++;
+			i+=2;
 			j++;
 			}
 		}
