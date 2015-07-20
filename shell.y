@@ -219,11 +219,11 @@ void expandWildcards(char * prefix, char * suffix){
 	c = strchr(arg,'?');
 
 	if(b == NULL && c == NULL){
-		if( prefix[0] == '\0' && arg[0] != '\0'){
+		if( prefix  == NULL && arg[0] != '\0'){
 			sprintf(newPrefix,"%s%s",prefix,arg);
 			expandWildcards(newPrefix,suffix);
 		}
-		else if(prefix[0] != '\0' && arg[0] != '\0'){
+		else if(prefix != NULL && arg[0] != '\0'){
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
 		}
