@@ -427,7 +427,7 @@ void expandWildcards(char * prefix, char * suffix){
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 			}
 			else{
-			exit(1);
+			array[i] = '\0';
 			}
 		}
 	
