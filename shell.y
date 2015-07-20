@@ -196,6 +196,7 @@ background_optional:
 
 #define MAXFILENAME 1024
 void expandWildcards(char * prefix, char * suffix){
+	printf("Pref: [%s] Suff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
