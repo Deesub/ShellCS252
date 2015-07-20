@@ -389,7 +389,7 @@ void expandWildcards(char * prefix, char * suffix){
 						}
                                             
 				}	
-				//expandWildcards(newPrefix,suffix);
+				expandWildcards(newPrefix,suffix);
 			
 
 		}	
