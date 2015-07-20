@@ -88,9 +88,9 @@ argument:
 			Command::_currentSimpleCommand->insertArgument($1);
 		}
 	        else {	
-		char *st =(char*)malloc(3);
-		st[0] = '\0';
-	 	      	expandWildcards(st,$1);
+		//char *st =(char*)malloc(3);
+		//st[0] = '\0';
+	 	      	expandWildcards(NULL,$1);
 		}
 	}
 	;
