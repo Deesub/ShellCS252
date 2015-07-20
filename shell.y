@@ -88,7 +88,7 @@ argument:
 			Command::_currentSimpleCommand->insertArgument($1);
 		}
 	        else {
-	 	      	expandWildcards("",$1);
+	 	      	expandWildcards(NULL,$1);
 		}
 	}
 	;
