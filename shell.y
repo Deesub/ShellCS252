@@ -194,7 +194,7 @@ background_optional:
 
 %%
 
-#define MAXFILENAME 10000
+#define MAXFILENAME 1000
 void expandWildcards(char * prefix, char * suffix){
 	//printf("Pref: [%s] Suff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
