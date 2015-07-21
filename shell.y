@@ -200,6 +200,7 @@ background_optional:
 void expandWildcards(char * prefix, char * suffix){
 	
 	int flag = 0;
+	int flag1 = 0;
 	printf("START---------------------------------------\n");
 	printf("Pref: [%s] \tSuff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
@@ -222,9 +223,10 @@ void expandWildcards(char * prefix, char * suffix){
 	else{
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
+		flag1 = 0;
 	}
 
-	printf("arg : [%s]\n",arg);
+	printf("arg : %s\n",arg);
 	printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
 	char * b;
