@@ -341,7 +341,7 @@ void expandWildcards(char * prefix, char * suffix){
 		perror("OPENDIR");
 		return;
 	}
-
+	printf("DIR:[%s]\n",dir);
 	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
@@ -437,15 +437,13 @@ void expandWildcards(char * prefix, char * suffix){
 		int i = 0;int j = 0;
 		//printf("ARRAY is :%s\n",array[i]);	
 		for(i = 0;i < nEntries;i++){
-		//if(flag == 0){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
-		//}
+		}
 			/*else{
 			array[i] = '\0';
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 			break;
 			}*/
-		}
 	
 	free(array); 
 	//return;
