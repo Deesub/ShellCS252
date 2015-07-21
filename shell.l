@@ -153,6 +153,7 @@ void myunputc(int c) {
 	for(i = 0;yytext[i] != '\0';i++,j++){
 		cmd[j] = yytext[i];
 	}
+	cmd[j] = '\0';
 	int len = strlen(cmd);
 	int tmpin = dup(0);
 	int tmpout = dup(1);
