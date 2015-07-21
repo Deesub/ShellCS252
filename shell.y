@@ -205,9 +205,10 @@ void expandWildcards(char * prefix, char * suffix){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
 		}
+		/*
 	if (suffix[0] == '/') {
 		suffix++;
-	}
+	}*/
 	char * s  = strchr(suffix, '/');
 	//printf("char *s : %s\n", s);
 	char arg[MAXFILENAME];
