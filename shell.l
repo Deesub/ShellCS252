@@ -180,7 +180,7 @@ void myunputc(int c) {
 	
 	dup2(fdpipec[1],1);
 	close(fdpipec[1]);
-
+	
 	int ret = fork();
 
 	if(ret == 0){
@@ -195,7 +195,7 @@ void myunputc(int c) {
 			perror("execvp");
 			exit(1);
 	}
-
+	/*
 	else
 	{	
 		write(fdpipep[1],cmd,len);
@@ -240,7 +240,7 @@ void myunputc(int c) {
 			buf[counter] = ' ';
 			}
 			unput(buf[counter]);
-		}
+		}*/
    	}	
 	
 
