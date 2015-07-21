@@ -198,6 +198,7 @@ background_optional:
 void expandWildcards(char * prefix, char * suffix){
 	
 	int flag = 0;
+	int homef = 0;
 	int flag1 = 0;
 	if(suffix[0] == 0){
 		return;
@@ -208,6 +209,7 @@ void expandWildcards(char * prefix, char * suffix){
 	if(s!=NULL){
 		if(suffix[0] == '/'){
 			strcpy(arg,"/");
+			homef = 1;
 		}	
 		else{
 		strncpy(arg,suffix,s-suffix);
@@ -244,6 +246,7 @@ void expandWildcards(char * prefix, char * suffix){
 			sprintf(newPrefix, "%s/%s", prefix, arg);
 			//expandWildcards(newPrefix, suffix);
 		}
+
 		expandWildcards(newPrefix,suffix);
 		return;
 	}
