@@ -243,7 +243,7 @@ void expandWildcards(char * prefix, char * suffix){
 		if (flag == 0) {
 			strcat(arg, "/");
 		}
-		if( prefix == NULL && arg[0] != '\0'){
+		if( prefix == NULL /*&& arg[0] != '\0'*/){
 			
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
@@ -422,11 +422,11 @@ void expandWildcards(char * prefix, char * suffix){
 						expandWildcards(newPrefix,suffix);
 					}
 				}
-				}
-				}
+			}
+		}
 				
-			closedir(d);
-			free(dir);
+		closedir(d);
+		//free(dir);
 		sortArrayStrings(array,nEntries);
 		int i = 0;int j = 0;
 		//printf("ARRAY is :%s\n",array[i]);	
