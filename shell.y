@@ -22,7 +22,7 @@
 
 
 #define yylex yylex
-
+#include <sys/dir.h>
 #include <ctype.h>
 #include <signal.h>
 #include <stdio.h>
