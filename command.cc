@@ -98,18 +98,7 @@ SimpleCommand::insertArgument( char * argument )
 		argument = strdup(fin);
 	}
 
-	if(strchr(argument,'\\') != NULL){
-		for(i = 0;argument[i] != '\0';i++){
-			if(argument[i] == '\\'){
-				i+=1;
-			}
-			esc[p++] = argument[i];
-		}
-		q = p;
-		esc[q] = '\0';
-		argument = strdup(esc);
 
-	}
 
 	if(len < 0){
 		_exit(1);
