@@ -141,19 +141,17 @@ void myunputc(int c) {
 
  `[^\n`]*`	{
  	//char buffer[100];
-	char * cmd = (char*)malloc(1000);
+	//char * cmd = (char*)malloc(1000);
 	int i = 0;
 	int j = 0;
 	int k = 0;
 	int counter = 0;
 	char ch = 0;
 	char * buf = (char*)malloc(1000);
-	yytext++;
-	yytext[strlen(yytext)-1] = '\0';
-	for(i = 0;yytext[i] != '\0';i++,j++){
-		cmd[j] = yytext[i];
-	}
-	cmd[j] = '\0';
+	char * cmd = strdup(yytext);
+	cmd[strlen(yytext)-1] = '\0';
+	cmd++;
+	printf("STRINg is [%s]\n",cmd);
 	int len = strlen(cmd);
 	int tmpin = dup(0);
 	int tmpout = dup(1);
