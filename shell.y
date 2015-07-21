@@ -361,7 +361,7 @@ void expandWildcards(char * prefix, char * suffix){
 					if(arg[0] == '.'){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
-							expandWildcards(newPrefix,suffix);
+							//expandWildcards(newPrefix,suffix);
 							//printf("Prefix : [%s]\n",prefix);
 							//array[nEntries] = strdup(newPrefix);
 							//nEntries++;
@@ -369,11 +369,14 @@ void expandWildcards(char * prefix, char * suffix){
 						else {
 							sprintf(newPrefix,"%s",ent->d_name);
 							//printf("Prefixcunt : [%s]\n",newPrefix);
-							expandWildcards(newPrefix,suffix);
+							//expandWildcards(newPrefix,suffix);
 							//array[nEntries] = strdup(newPrefix);
 							//nEntries++;
 						}
+						array[nEntries] = strdup(newPrefix);
+						nEntries++;
 					}
+					expandWildcards(newPrefix,suffix);
 				}
 				/*
 				else
@@ -403,41 +406,34 @@ void expandWildcards(char * prefix, char * suffix){
 				}
 				*/
 
-				else if ((strchr(suffix, '/') == NULL) || (strchr(suffix, '*') == NULL) && (flag1 == 1)) {
-					if (prefix == NULL) {
-						sprintf(newPrefix, "%s", ent->d_name);
+				else if ((strchr(suffix, '/') == NULL) || (strchr(suffix, '*') == NULL)) {
+					if (flag1 == 1) {
+						if (prefix == NULL) {
+							sprintf(newPrefix, "%s", ent->d_name);
+						}
+						else {
+							sprintf(newPrefix, "%s/%s", prefix, ent->d_name);
+						}
+						array[nEntries] = strdup(newPrefix);
+						nEntries++;
 					}
-					else {
-						sprintf(newPrefix, "%s/%s", prefix, ent->d_name);
+					else if(flag == 1){
+						sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
+						expandWildcards(newPrefix,suffix);
 					}
-				//expandWildcards(newPrefix,suffix);
-				array[nEntries] =strdup(newPrefix);
-				nEntries++;
-				int k = 0;
-				for(k = 0;k < nEntries;k++){
-					if(strcmp(array[k],newPrefix) == 0){
-						flag = 1;
-						break;
-					}
-					else{
-						flag = 0;
-					}
-				}			
-
-			}
-		}
-
-	}
-	closedir(d);
-	free(dir);
-	sortArrayStrings(array,nEntries);
-	int i = 0;int j = 0;
-		//printf("ARRAY is :%s\n",array[i]);
-	
+				}
+				}
+				}
+				
+			closedir(d);
+			free(dir);
+		sortArrayStrings(array,nEntries);
+		int i = 0;int j = 0;
+		//printf("ARRAY is :%s\n",array[i]);	
 		for(i = 0;i < nEntries;i++){
-			//if(flag == 0){
-			Command::_currentSimpleCommand->insertArgument(array[i]);
-			//}
+		//if(flag == 0){
+		Command::_currentSimpleCommand->insertArgument(array[i]);
+		//}
 			/*else{
 			array[i] = '\0';
 			Command::_currentSimpleCommand->insertArgument(array[i]);
@@ -445,8 +441,8 @@ void expandWildcards(char * prefix, char * suffix){
 			}*/
 		}
 	
-	//free(array); 
-	return;
+	free(array); 
+	//return;
 }
 
 void sortArrayStrings(char ** arr,int num){
