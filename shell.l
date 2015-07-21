@@ -140,24 +140,86 @@ void myunputc(int c) {
 
 
  `[^\n`]*`	{
- 	char buffer[100];
+ 	//char buffer[100];
 	char * cmd = (char*)malloc(1000);
 	int i = 0;
 	int j = 0;
-	int ctr = 0;
+	int k = 0;
+	int counter = 0;
+	char ch = 0;
+	char * buf = (char*)malloc(1000);
 	yytext++;
 	yytext[strlen(yytext)-1] = '\0';
 	for(i = 0;yytext[i] != '\0';i++,j++){
 		cmd[j] = yytext[i];
 	}
+	int len = strlen(cmd);
+	int tmpin = dup(0);
+	int tmpout = dup(1);
+
+
+	int fdpipep[2];
+	int fdpipec[2];
+
+	int fdc = pipe(fdpipec);
+	int fdp = pipe(fdpipep);
+
+	if(fdc == -1){
+		perror("pipe");
+		exit(1);
+	}
+	if(fdp == -1){
+		perror("pipe");
+		exit(1);
+	}
+	int cr = fdpipep[0];
+	int cw = fdpipec[1];
+	int pr = fdpipec[0];
+	int pw = fdpipep[1];
 	
        
-	
-    
-               
- }	
+	int ret = fork();
 
-	
+	if(ret == 0){
+		write(fdpipep[1],cmd,len);
+		close(fdpipep[1]);
+		close(fdpipec[0]);
+		dup2(fdpipep[0],0);
+		dup2(fdpipec[1],1);
+
+		execvp("shell",NULL);
+			perror("execvp");
+			exit(1);
+	}
+
+	else
+	{
+		close(fdpipep[1]);
+		close(fdpipec[1]);
+		close(fdpipep[0]);
+		waitpid(ret,NULL,0);
+		
+
+		while(read(fdpipec[0],&ch,1)){
+			buf[k] = ch;
+			k++;
+		}
+		
+		close(fdpipec[0]);
+		dup2(tmpin,0);
+		dup2(tmpout,1);
+
+		counter = k;
+
+		for(;counter > 0;counter --){
+			if(buf[counter] == '\n'){
+			buf[counter] = ' ';
+			}
+			unput(buf[counter]);
+		}
+   	}	
+
+}	
 
 	
 
