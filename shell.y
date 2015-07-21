@@ -199,8 +199,8 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	int flag = 0;
 	int flag1 = 0;
-	printf("START---------------------------------------\n");
-	printf("Pref: [%s] \tSuff: [%s]\n", prefix, suffix);
+	//printf("START---------------------------------------\n");
+	//printf("Pref: [%s] \tSuff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
@@ -209,7 +209,7 @@ void expandWildcards(char * prefix, char * suffix){
 		suffix++;
 	}
 	char * s  = strchr(suffix, '/');
-	printf("char *s : %s\n", s);
+	//printf("char *s : %s\n", s);
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
@@ -224,21 +224,21 @@ void expandWildcards(char * prefix, char * suffix){
 		flag = 1;
 	}
 	else{
-		printf("no slash: %s\n", suffix);
+		//printf("no slash: %s\n", suffix);
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 		flag1 = 1;
 	}
 
-	printf("arg : %s\n",arg);
-	printf("suffix : [%s]\n",suffix);
+	//printf("arg : %s\n",arg);
+	//printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
 	b = strchr(arg,'*');
 	c = strchr(arg,'?');
-	printf("NEWPREF: [%s] SUFF: [%s]\n",newPrefix,suffix);
-	printf("ARG : [%s]\n",arg);
+	//printf("NEWPREF: [%s] SUFF: [%s]\n",newPrefix,suffix);
+	//printf("ARG : [%s]\n",arg);
 	if(b == NULL && c == NULL){
 		if (flag == 0) {
 			strcat(arg, "/");
@@ -247,7 +247,7 @@ void expandWildcards(char * prefix, char * suffix){
 			
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
-			printf("NEWPref: [%s] SUFF: [%s]\n",newPrefix,suffix); 
+			//printf("NEWPref: [%s] SUFF: [%s]\n",newPrefix,suffix); 
 		}/*
 		else if(prefix[0] == '/' && arg != NULL){
 			sprintf(newPrefix,"/%s",arg);
@@ -279,8 +279,8 @@ void expandWildcards(char * prefix, char * suffix){
 		return;
 	}
 	
-	printf("Prefix : [%s]\n",prefix);
-	printf("suffix : [%s]\n",suffix);
+	//printf("Prefix : [%s]\n",prefix);
+	//printf("suffix : [%s]\n",suffix);
 
 	char * reg = (char*)malloc(2*strlen(arg) + 10);
 	char * a = arg;
@@ -350,7 +350,7 @@ void expandWildcards(char * prefix, char * suffix){
 	while((ent = readdir(d))!=NULL){
 	
 		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0 && flag1 == 1){
-			printf("fucboi: [%s]\n", ent->d_name);
+			//printf("fucboi: [%s]\n", ent->d_name);
 			if(nEntries == maxEntries){
 				maxEntries*=2;
 				array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
@@ -362,13 +362,13 @@ void expandWildcards(char * prefix, char * suffix){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
 							expandWildcards(newPrefix,suffix);
-							printf("Prefix : [%s]\n",prefix);
+							//printf("Prefix : [%s]\n",prefix);
 							//array[nEntries] = strdup(newPrefix);
 							//nEntries++;
 						}
 						else {
 							sprintf(newPrefix,"%s",ent->d_name);
-							printf("Prefixcunt : [%s]\n",newPrefix);
+							//printf("Prefixcunt : [%s]\n",newPrefix);
 							expandWildcards(newPrefix,suffix);
 							//array[nEntries] = strdup(newPrefix);
 							//nEntries++;
