@@ -151,7 +151,7 @@ void myunputc(int c) {
 	char * cmd = strdup(yytext);
 	cmd[strlen(yytext)-1] = '\0';
 	cmd++;
-	printf("STRINg is [%s]\n",cmd);
+	//printf("STRINg is [%s]\n",cmd);
 	int len = strlen(cmd);
 	int tmpin = dup(0);
 	int tmpout = dup(1);
