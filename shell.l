@@ -216,7 +216,7 @@ void myunputc(int c) {
 
 
 
-		for(counter = strlen(buf);counter > 0;counter --){
+		for(counter = strlen(buf);counter >= 0;counter --){
 			if(buf[counter] == '\n'){
 			buf[counter] = ' ';
 			}
