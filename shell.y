@@ -327,7 +327,7 @@ void expandWildcards(char * prefix, char * suffix){
 
 	
 	
-	 char * dir;
+	char * dir;
 	if(prefix == NULL){
 		dir = strdup(".");
 	}
@@ -338,7 +338,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	DIR * d = opendir(dir);
 	if(d == NULL){
-		//perror("OPENDIR");
+		perror("OPENDIR");
 		return;
 	}
 
@@ -349,7 +349,7 @@ void expandWildcards(char * prefix, char * suffix){
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
-		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
+		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0 && flag1 == 1){
 			//printf("fucboi: [%s]\n", ent->d_name);
 			if(nEntries == maxEntries){
 				maxEntries*=2;
@@ -360,24 +360,22 @@ void expandWildcards(char * prefix, char * suffix){
 				if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
 						if(prefix != NULL){
-							sprintf(newPrefix,"%s%s",prefix,ent->d_name);
+							sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
 							expandWildcards(newPrefix,suffix);
 							//printf("Prefix : [%s]\n",prefix);
-							array[nEntries] = strdup(newPrefix);
-							nEntries++;
+							//array[nEntries] = strdup(newPrefix);
+							//nEntries++;
 						}
-						else if(prefix == NULL){
+						else {
 							sprintf(newPrefix,"%s",ent->d_name);
 							//printf("Prefixcunt : [%s]\n",newPrefix);
 							expandWildcards(newPrefix,suffix);
-							array[nEntries] = strdup(newPrefix);
-							nEntries++;
+							//array[nEntries] = strdup(newPrefix);
+							//nEntries++;
 						}
-						else{
-						}
-
 					}
 				}
+				/*
 				else
 				{	if(prefix != NULL){
 							if(prefix[0]!= '\0' && prefix[strlen(prefix)-1] == '/'){
@@ -402,8 +400,17 @@ void expandWildcards(char * prefix, char * suffix){
 						else{
 						}
                                             
-				}	
-				expandWildcards(newPrefix,suffix);
+				}
+				*/
+
+				else if ((strchr(suffix, '/') == NULL) || (strchr(suffix, '*') == NULL) && (flag1 == 1)) {
+					if (prefix == NULL) {
+						sprintf(newPrefix, "%s", ent->d_name);
+					}
+					else {
+						sprintf(newPrefix, "%s/%s", prefix, ent->d_name);
+					}
+				//expandWildcards(newPrefix,suffix);
 				array[nEntries] =strdup(newPrefix);
 				nEntries++;
 				int k = 0;
@@ -417,7 +424,8 @@ void expandWildcards(char * prefix, char * suffix){
 					}
 				}			
 
-		}	
+			}
+		}
 
 	}
 	closedir(d);
