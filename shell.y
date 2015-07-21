@@ -208,15 +208,10 @@ void expandWildcards(char * prefix, char * suffix){
 	char arg[MAXFILENAME];
 	
 	if(s!=NULL){
-		if(suffix[0] == '/'){
-			strcpy(arg,"/");
-			homef = 1;
-		}	
-		else{
-		strncpy(arg,suffix,s-suffix);
 		
+		
+		strncpy(arg,suffix,s-suffix);
 		arg[s-suffix] = '\0';
-		}
 		
 		printf("ARG is[%s]\n",arg);
 		suffix = s+1;
