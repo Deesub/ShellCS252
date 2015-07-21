@@ -174,9 +174,10 @@ void myunputc(int c) {
 
 	write(fdpipec[1],cmd,len);
 	write(fdpipec[1],"\n",1);
-	write(fdpipec[1],"exit",5);
+	write(fdpipec[1],"exit",4);
 	write(fdpipec[1],"\n",1);
 
+	close(fdpipec[1]);
 	dup2(fdpipec[0],0);
 	close(fdpipec[0]);
 	dup2(fdpipep[1],1);
@@ -188,6 +189,7 @@ void myunputc(int c) {
 		execvp("/proc/self/exe",NULL);
 			perror("execvp");
 			exit(1);
+		
 	
 	}
 	else if (ret < 0){
@@ -195,9 +197,7 @@ void myunputc(int c) {
 		exit(1);
 	}
 	dup2(tmpin,0);
-	close(tmpin);
 	dup2(tmpout,1);
-	close(tmpout);
 
 		
 
