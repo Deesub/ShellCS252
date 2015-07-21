@@ -141,17 +141,15 @@ void myunputc(int c) {
 
  `[^\n`]*`	{
  	char buffer[100];
-	char cmd[100];
+	char * cmd = (char*)malloc(1000);
 	int i = 0;
 	int j = 0;
 	int ctr = 0;
-	while(yytext[i] != '\0'){
-		if(yytext[0] == '`'){	
-			cmd[j++] = yytext[i++];
-		}
-	i++;
+	yytext++;
+	yytext[strlen(yytext)-1] = '\0';
+	for(i = 0;yytext[i] != '\0';i++,j++){
+		cmd[j] = yytext[i];
 	}
-	cmd[j-1] = '\0';
 	
        
 	
