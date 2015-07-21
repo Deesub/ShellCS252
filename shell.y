@@ -330,20 +330,20 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	char * dir;
 	if(prefix == NULL){
-		dir = ".";
+		dir = strdup(".");
 	}
 	else
 	{
 		dir = strdup(prefix);
 	}
-	
+	printf("DIR:[%s]\n",dir);
 	DIR * d = opendir(dir);
 	if(d == NULL){
 		printf("Error dir: %s\n", dir);
 		perror("OPENDIR");
 		return;
 	}
-	printf("DIR:[%s]\n",dir);
+	
 	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
