@@ -213,7 +213,7 @@ void expandWildcards(char * prefix, char * suffix){
 		strncpy(arg,suffix,s-suffix);
 		arg[s-suffix] = '\0';
 		
-		printf("ARG is[%s]\n",arg);
+		//printf("ARG is[%s]\n",arg);
 		suffix = s+1;
 		flag = 1;
 	}
