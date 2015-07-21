@@ -199,90 +199,47 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	int flag = 0;
 	int flag1 = 0;
-	//printf("START---------------------------------------\n");
-	//printf("Pref: [%s] \tSuff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
-		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
 		}
-		/*
-	if (suffix[0] == '/') {
-		suffix++;
-	}*/
 	char * s  = strchr(suffix, '/');
-	//printf("char *s : %s\n", s);
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
-		/*if(s-suffix == 0){
-		//printf("BEF:[%s]\n",arg);
-			arg[0] = '/';
-		//printf("AFTER:[%s]\n",arg);
-		}*/
 		arg[s-suffix] = '\0';
 		suffix = s+1;
-		//suffix ++;
 		flag = 1;
 	}
 	else{
-		//printf("no slash: %s\n", suffix);
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 		flag1 = 1;
 	}
 
-	//printf("arg : %s\n",arg);
-	//printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
 	b = strchr(arg,'*');
 	c = strchr(arg,'?');
-	//printf("NEWPREF: [%s] SUFF: [%s]\n",newPrefix,suffix);
-	//printf("ARG : [%s]\n",arg);
 	if(b == NULL && c == NULL){
 		if (flag == 0) {
 			strcat(arg, "/");
 		}
-		if( prefix == NULL /*&& arg[0] != '\0'*/){
+		if( prefix == NULL){
 			
 			sprintf(newPrefix,"%s",arg);
-			expandWildcards(newPrefix,suffix);
-			//printf("NEWPref: [%s] SUFF: [%s]\n",newPrefix,suffix); 
-		}/*
-		else if(prefix[0] == '/' && arg != NULL){
-			sprintf(newPrefix,"/%s",arg);
-			expandWildcards(newPrefix,suffix);		
+			//expandWildcards(newPrefix,suffix);
 		}
-
-		else if(prefix != NULL  && arg[0] != '\0'){
-			if(prefix[0] != '\0' && prefix[strlen(prefix) - 1] == '/'){
-				prefix[strlen(prefix) -1] = '\0';			
-			}
-			sprintf(newPrefix,"%s/%s",prefix,arg);
-			expandWildcards(newPrefix,suffix);
-		}
-		else if(prefix[0] == '\0' && arg[0] != '\0'){
-			sprintf(newPrefix,"%s",arg);
-			expandWildcards(newPrefix,suffix);
-			//printf("NEWPREF: [%s] SUFF [%s]\n",newPrefix,suffix);
-		}
-		
-
-		else if(arg[0] == '\0'){
-			expandWildcards("",suffix);
-		}*/
 		
 		else {
 			sprintf(newPrefix, "%s/%s", prefix, arg);
-			expandWildcards(newPrefix, suffix);
+			//expandWildcards(newPrefix, suffix);
 		}
+		expandWildcards(newPrefix,suffix);
 		return;
 	}
 	
-	//printf("Prefix : [%s]\n",prefix);
-	//printf("suffix : [%s]\n",suffix);
-	//printf("Getting into here\n");
+	
 
 	char * reg = (char*)malloc(2*strlen(arg) + 10);
 	char * a = arg;
@@ -337,11 +294,9 @@ void expandWildcards(char * prefix, char * suffix){
 	{
 		dir = strdup(prefix);
 	}
-	//printf("DIR:[%s]\n",dir);
 	DIR * d = opendir(dir);
 	if(d == NULL){
-		//printf("Error dir: %s\n", dir);
-		//perror("OPENDIR");
+		perror("OPENDIR");
 		return;
 	}
 	
@@ -352,63 +307,20 @@ void expandWildcards(char * prefix, char * suffix){
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
-		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0 /*&& flag1 == 1*/){
-			//printf("fucboi: [%s]\n", ent->d_name);
-			/*
-			if(nEntries == maxEntries){
-				maxEntries*=2;
-				array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
-				assert(array!=NULL);
-			}
-			*/
+		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
 				if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
-							//expandWildcards(newPrefix,suffix);
-							//printf("Prefix : [%s]\n",prefix);
-							//array[nEntries] = strdup(newPrefix);
-							//nEntries++;
 						}
 						else {
 							sprintf(newPrefix,"%s",ent->d_name);
-							//printf("Prefixcunt : [%s]\n",newPrefix);
-							//expandWildcards(newPrefix,suffix);
-							//array[nEntries] = strdup(newPrefix);
-							//nEntries++;
 						}
 						array[nEntries] = strdup(newPrefix);
 						nEntries++;
 					}
 					expandWildcards(newPrefix,suffix);
 				}
-				/*
-				else
-				{	if(prefix != NULL){
-							if(prefix[0]!= '\0' && prefix[strlen(prefix)-1] == '/'){
-								prefix[strlen(prefix) -1] = '\0';
-							}
-							sprintf(newPrefix,"%s/%s",prefix, ent->d_name);
-							
-							expandWildcards(newPrefix,suffix);
-							//printf("Prefix : [%s]\n",prefix);
-							//printf("ent->d_name : [%s]\n",ent->d_name);
-							array[nEntries] =strdup(newPrefix);
-							nEntries++;
-						}
-						else if(prefix == NULL){
-							sprintf(newPrefix,"%s",ent->d_name);
-							//printf("Prefix : [%s]\n",prefix);
-							//printf("ent->d_name : [%s]\n",ent->d_name);
-							expandWildcards(newPrefix,suffix);
-							array[nEntries] =strdup(newPrefix);
-							nEntries++;
-						}
-						else{
-						}
-                                            
-				}
-				*/
 
 				else if ((strchr(suffix, '/') == NULL) || (strchr(suffix, '*') == NULL)) {
 					if (flag1 == 1) {
@@ -435,21 +347,14 @@ void expandWildcards(char * prefix, char * suffix){
 		}
 				
 		closedir(d);
-		//free(dir);
 		sortArrayStrings(array,nEntries);
 		int i = 0;int j = 0;
-		//printf("ARRAY is :%s\n",array[i]);	
 		for(i = 0;i < nEntries;i++){
 		Command::_currentSimpleCommand->insertArgument(array[i]);
 		}
-			/*else{
-			array[i] = '\0';
-			Command::_currentSimpleCommand->insertArgument(array[i]);
-			break;
-			}*/
 	
 	free(array); 
-	//return;
+	return;
 }
 
 void sortArrayStrings(char ** arr,int num){
