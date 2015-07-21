@@ -275,20 +275,20 @@ void expandWildcards(char * prefix, char * suffix){
 	*r = 0;
 
 	
-	int regco;
+	int regco = 0;
 	regex_t re;
 	regco = regcomp(&re,reg,REG_EXTENDED | REG_NOSUB);
 
 	if(regco!=0){
-	perror("BAD regex bro, better luck next time");
-	exit(1);
+		perror("BAD regex bro, better luck next time");
+		exit(1);
 	}
 
 	
 	
-	const char * dir;
+	char * dir;
 	if(prefix == NULL){
-		dir = ".";
+		dir = strdup(".");
 	}
 	else
 	{
@@ -296,7 +296,6 @@ void expandWildcards(char * prefix, char * suffix){
 	}
 	DIR * d = opendir(dir);
 	if(d == NULL){
-		//perror("OPENDIR");
 		return;
 	}
 	
