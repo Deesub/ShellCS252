@@ -351,12 +351,13 @@ void expandWildcards(char * prefix, char * suffix){
 	
 		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0 /*&& flag1 == 1*/){
 			//printf("fucboi: [%s]\n", ent->d_name);
+			/*
 			if(nEntries == maxEntries){
 				maxEntries*=2;
 				array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
 				assert(array!=NULL);
 			}
-			
+			*/
 				if(ent->d_name[0] == '.'){
 					if(arg[0] == '.'){
 						if(prefix != NULL){
@@ -422,6 +423,11 @@ void expandWildcards(char * prefix, char * suffix){
 						expandWildcards(newPrefix,suffix);
 					}
 				}
+				if(nEntries == maxEntries){
+					maxEntries*=2;
+					array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
+					assert(array!=NULL);
+	                        }
 			}
 		}
 				
