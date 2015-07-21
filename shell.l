@@ -173,9 +173,9 @@ void myunputc(int c) {
 	}
 
 	write(fdpipec[1],cmd,len);
-	write(1,"\n",1);
-	write(1,"exit",5);
-	write(1,"\n",1);
+	write(fdpipec[1],"\n",1);
+	write(fdpipec[1],"exit",5);
+	write(fdpipec[1],"\n",1);
 
 	dup2(fdpipec[0],0);
 	close(fdpipec[0]);
