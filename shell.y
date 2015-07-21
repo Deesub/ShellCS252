@@ -296,7 +296,7 @@ void expandWildcards(char * prefix, char * suffix){
 	}
 	DIR * d = opendir(dir);
 	if(d == NULL){
-		perror("OPENDIR");
+		//perror("OPENDIR");
 		return;
 	}
 	
