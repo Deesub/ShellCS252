@@ -206,7 +206,9 @@ void expandWildcards(char * prefix, char * suffix){
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
+		
 		arg[s-suffix] = '\0';
+		printf("ARG is[%s]\n",arg);
 		suffix = s+1;
 		flag = 1;
 	}
