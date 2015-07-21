@@ -85,12 +85,10 @@ argument:
 	WORD {
             /* printf("   Yacc: insert argument \"%s\"\n", $1); */
               
-		if(strchr($1,'*') == NULL && strchr($1,'?') == NULL){
+		if((strchr($1,'*') == NULL) && (strchr($1,'?') == NULL)){
 			Command::_currentSimpleCommand->insertArgument($1);
 		}
 	        else {	
-		//char *st =(char*)malloc(3);
-		//st[0] = '\0';
 	 	      	expandWildcards(NULL,$1);
 		}
 	}
@@ -208,6 +206,7 @@ void expandWildcards(char * prefix, char * suffix){
 		return;
 		}
 	char * s  = strchr(suffix, '/');
+	printf("char *s : %s\n", s);
 	char arg[MAXFILENAME];
 	if(s!=NULL){
 		strncpy(arg,suffix,s-suffix);
