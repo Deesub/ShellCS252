@@ -411,26 +411,19 @@ void expandWildcards(char * prefix, char * suffix){
 	sortArrayStrings(array,nEntries);
 	int i = 0;int j = 0;
 		//printf("ARRAY is :%s\n",array[i]);
-		char ** tri = array;
-		if(array[0][0] == '/' && array[0][1] == '/'){
-
-		for(j = 1 ;j < nEntries;j++){
-		Command::_currentSimpleCommand->insertArgument(tri[j]);
-		}
-	}
 	
 		for(i = 0;i < nEntries;i++){
-			if(flag == 0){
+			//if(flag == 0){
 			Command::_currentSimpleCommand->insertArgument(array[i]);
-			}
-			else{
+			//}
+			/*else{
 			array[i] = '\0';
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 			break;
-			}
+			}*/
 		}
 	
-	free(array); 
+	//free(array); 
 	return;
 }
 
