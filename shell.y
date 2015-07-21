@@ -199,8 +199,8 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	int flag = 0;
 	int flag1 = 0;
-	//printf("START---------------------------------------\n");
-	//printf("Pref: [%s] \tSuff: [%s]\n", prefix, suffix);
+	printf("START---------------------------------------\n");
+	printf("Pref: [%s] \tSuff: [%s]\n", prefix, suffix);
 	if(suffix[0] == 0){
 		//Command::_currentSimpleCommand->insertArgument(strdup(prefix));
 		return;
@@ -230,8 +230,8 @@ void expandWildcards(char * prefix, char * suffix){
 		flag1 = 1;
 	}
 
-	//printf("arg : %s\n",arg);
-	//printf("suffix : [%s]\n",suffix);
+	printf("arg : %s\n",arg);
+	printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
