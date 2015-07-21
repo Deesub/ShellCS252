@@ -350,7 +350,12 @@ void expandWildcards(char * prefix, char * suffix){
 		sortArrayStrings(array,nEntries);
 		int i = 0;int j = 0;
 		for(i = 0;i < nEntries;i++){
-		Command::_currentSimpleCommand->insertArgument(array[i]);
+			if(strcmp(array[i],"./") == 0){
+				Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
+			}
+			else{
+				Command::_currentSimpleCommand->insertArgument(array[i]);
+			}
 		}
 	
 	free(array); 
