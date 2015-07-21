@@ -351,7 +351,7 @@ void expandWildcards(char * prefix, char * suffix){
 		int i = 0;int j = 0;
 		for(i = 0;i < nEntries;i++){
 			//if(strstr(array[i],"/.") != NULL){
-				Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
+			//	Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 			//}
 			//else{
 				Command::_currentSimpleCommand->insertArgument(array[i]);
