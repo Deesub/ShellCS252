@@ -187,7 +187,7 @@ void myunputc(int c) {
 	if(ret == 0){
 		execvp("/proc/self/exe",NULL);
 			perror("execvp");
-			exit(1);
+			_exit(1);
 		
 	
 	}

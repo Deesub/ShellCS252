@@ -228,7 +228,7 @@ Command::execute()
 		return;
 	}
 	if(strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0){
-	printf("Goodbye! \n\n" );
+	//printf("Goodbye! \n\n" );
 	_exit(1);
 	}
 
