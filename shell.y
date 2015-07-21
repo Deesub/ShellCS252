@@ -339,6 +339,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	DIR * d = opendir(dir);
 	if(d == NULL){
+		printf("Error dir: %s\n", dir);
 		perror("OPENDIR");
 		return;
 	}
