@@ -349,7 +349,7 @@ void expandWildcards(char * prefix, char * suffix){
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
 	
-		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0 && flag1 == 1){
+		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0 /*&& flag1 == 1*/){
 			//printf("fucboi: [%s]\n", ent->d_name);
 			if(nEntries == maxEntries){
 				maxEntries*=2;
