@@ -172,20 +172,23 @@ void myunputc(int c) {
 		perror("pipe");
 		exit(1);
 	}
-	int cr = fdpipep[0];
-	int cw = fdpipec[1];
-	int pr = fdpipec[0];
-	int pw = fdpipep[1];
+
 	
-       
+	dup2(fdpipep[0],0);
+	close(fdpipep[0]);
+	
+	dup2(fdpipec[1],1);
+	close(fdpipec[1]);
+
 	int ret = fork();
 
 	if(ret == 0){
-		write(fdpipep[1],cmd,len);
-		close(fdpipep[1]);
+		dup2(fdpipec[0],0);
 		close(fdpipec[0]);
-		dup2(fdpipep[0],0);
-		dup2(fdpipec[1],1);
+		dup2(fdpipep[1],1);
+		close(fdpipep[1]);
+
+		//write(fdpipep[1],cmd,len);
 
 		execvp("shell",NULL);
 			perror("execvp");
@@ -193,21 +196,41 @@ void myunputc(int c) {
 	}
 
 	else
-	{
+	{	
+		write(fdpipep[1],cmd,len);
+
+		dup2(tmpout,1);
+		close(tmpout);
+		
 		close(fdpipep[1]);
-		close(fdpipec[1]);
 		close(fdpipep[0]);
+		close(fdpipec[1]);
+		close(fdpipec[0]);
 		waitpid(ret,NULL,0);
 		
 
 		while(read(fdpipec[0],&ch,1)){
-			buf[k] = ch;
+			if(ch == '\n'){
+				buf[k] = ' ';
+				
+			}
+			else{
+				buf[k] = ch;
+				
+			}
 			k++;
 		}
+		buf[k] = '\0';
 		
-		close(fdpipec[0]);
 		dup2(tmpin,0);
-		dup2(tmpout,1);
+		close(tmpin);
+		
+		close(fdpipep[0]);
+		close(fdpipep[1]);
+		close(fdpipec[0]);
+		close(fdpipec[1]);
+		
+		}
 
 		counter = k;
 
@@ -218,8 +241,7 @@ void myunputc(int c) {
 			unput(buf[counter]);
 		}
    	}	
-
-}	
+	
 
 	
 
