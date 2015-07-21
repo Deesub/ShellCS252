@@ -350,7 +350,7 @@ void expandWildcards(char * prefix, char * suffix){
 		sortArrayStrings(array,nEntries);
 		int i = 0;
 		for(i = 0;i < nEntries;i++){
-			printf("ARAY [%s]\n",array[i]);
+			//printf("ARAY [%s]\n",array[i]);
 			Command::_currentSimpleCommand->insertArgument(array[i]);
 		}
 	
