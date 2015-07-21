@@ -295,6 +295,7 @@ void expandWildcards(char * prefix, char * suffix){
 		dir = strdup(prefix);
 	}
 	DIR * d = opendir(dir);
+	
 	if(d == NULL){
 		return;
 	}
