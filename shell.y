@@ -221,12 +221,13 @@ void expandWildcards(char * prefix, char * suffix){
 		arg[s-suffix] = '\0';
 		suffix = s+1;
 		//suffix ++;
+		flag = 1;
 	}
 	else{
-		printf("no slash: %s\n", suffix);
+		//printf("no slash: %s\n", suffix);
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
-		flag1 = 0;
+		flag1 = 1;
 	}
 
 	printf("arg : %s\n",arg);
@@ -239,12 +240,15 @@ void expandWildcards(char * prefix, char * suffix){
 	//printf("NEWPREF: [%s] SUFF: [%s]\n",newPrefix,suffix);
 	//printf("ARG : [%s]\n",arg);
 	if(b == NULL && c == NULL){
+		if (flag == 0) {
+			strcat(arg, "/");
+		}
 		if( prefix == NULL && arg[0] != '\0'){
 			
 			sprintf(newPrefix,"%s",arg);
 			expandWildcards(newPrefix,suffix);
 			//printf("NEWPref: [%s] SUFF: [%s]\n",newPrefix,suffix); 
-		}
+		}/*
 		else if(prefix[0] == '/' && arg != NULL){
 			sprintf(newPrefix,"/%s",arg);
 			expandWildcards(newPrefix,suffix);		
@@ -266,8 +270,13 @@ void expandWildcards(char * prefix, char * suffix){
 
 		else if(arg[0] == '\0'){
 			expandWildcards("",suffix);
+		}*/
+		
+		else {
+			sprintf(newPrefix, "%s/%s", prefix, arg);
+			expandWildcards(newPrefix, suffix);
 		}
-		//return;
+		return;
 	}
 	
 	//printf("Prefix : [%s]\n",prefix);
