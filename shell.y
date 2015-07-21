@@ -221,6 +221,7 @@ void expandWildcards(char * prefix, char * suffix){
 		//suffix ++;
 	}
 	else{
+		printf("no slash: %s\n", suffix);
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 		flag1 = 0;
