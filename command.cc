@@ -114,13 +114,15 @@ SimpleCommand::insertArgument( char * argument )
 	if(len < 0){
 		_exit(1);
 	}
-	else if(argument[0] == '~' && len == 1){
+	else if(argument[0] == '~' && len > 0){
+		if(len == 1){
 			argument = strdup(getenv("HOME"));
 		}
 		else
 		{
 			argument = strdup(getpwnam(argument+1)->pw_dir);
 		}
+	}
 	 
 	_arguments[ _numberOfArguments ] = argument;
 
