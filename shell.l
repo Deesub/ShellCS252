@@ -125,16 +125,16 @@ void myunputc(int c) {
 
 
 \"[^\n\"]*\"       {
-		/*int last = 0;
+		int last = 0;
 		char * st = strdup(yytext);
 			st++;
 		st[strlen(st) - 1] = 0;
 		yylval.string_val = st;
 		return WORD;
-		*/
-		yylval.string_val = strdup(yytext+1);
+		
+		/*yylval.string_val = strdup(yytext+1);
 		yylval.string_val[strlen(yylval.string_val)-1] = 0;
-		return WORD;
+		return WORD;*/
 		
 	}
 
@@ -149,36 +149,10 @@ void myunputc(int c) {
 		if(yytext[0] == '`'){	
 			cmd[j++] = yytext[i++];
 		}
+	i++;
 	}
 	cmd[j-1] = '\0';
 	
-	int tmpin = dup(0);
-	int tmpout = dup(1);
-	int fdpipec[2];
-	int fdpipep[2];
-
-	int fdc = pipe(fdpipec);
-	int fdp = pipe(fdpipep);
-
-	if(fdc == -1){
-		perror("pipe");
-		exit(1);
-	}
-	if(fdp == -1){
-		perror("pipe");
-		exit(1);
-	}
-	
-	/*int len = strlen(cmd);
-	while(ctr <= len){
-	write(1,cmd,1);
-	}
-
-	dup2(fdpipep[0],0);
-        close(fdpipep[0]);
-
-        dup2(fdpipec[1],1);
-        close(fdpipec[1]);*/
        
 	
     
