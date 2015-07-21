@@ -281,7 +281,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	//printf("Prefix : [%s]\n",prefix);
 	//printf("suffix : [%s]\n",suffix);
-	printf("Getting into here\n");
+	//printf("Getting into here\n");
 
 	char * reg = (char*)malloc(2*strlen(arg) + 10);
 	char * a = arg;
@@ -330,7 +330,7 @@ void expandWildcards(char * prefix, char * suffix){
 	
 	char * dir;
 	if(prefix == NULL){
-		dir = strdup(".");
+		dir = ".";
 	}
 	else
 	{
