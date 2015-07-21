@@ -343,11 +343,7 @@ void expandWildcards(char * prefix, char * suffix){
 						else {
 							sprintf(newPrefix, "%s/%s", prefix, ent->d_name);
 						}
-						if(strstr(newPrefix,"//") != NULL){
-							m = newPrefix;
-							m++;						
-						}
-						array[nEntries] = strdup(m);
+						array[nEntries] = strdup(newPrefix);
 						nEntries++;
 					}
 					else if(flag == 1){
