@@ -231,8 +231,8 @@ void expandWildcards(char * prefix, char * suffix){
 		flag1 = 1;
 	}
 
-	printf("arg : %s\n",arg);
-	printf("suffix : [%s]\n",suffix);
+	//printf("arg : %s\n",arg);
+	//printf("suffix : [%s]\n",suffix);
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
