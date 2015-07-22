@@ -250,60 +250,52 @@ Command::execute()
 			int res = 0;
 			char * argv1 = _simpleCommands[0]->_arguments[1];
 			char * hdir = getenv("HOME");
-			if(argv1 != NULL && _simpleCommands[0]->_numberOfArguments >= 1 )
+			if(argv1 != NULL && _simpleCommands[0]->_numberOfArguments >= 1 ){
 				res = chdir(argv1);
-			else
-				//char * hdir = getenv("HOME");
+			}
+			else{
 				res = chdir(hdir);
-
+			}
 			if(res == 0){
 				clear();
 				prompt();
 				return;
 			}
-			else
+			else{
 				perror("chdir");
+				exit(1);
+			}
 
 		}
-
-
-	// Print contents of Command data structure
-	//print();
-
-	
-
-
 
 	int tmpin=dup(0);
 	int tmpout=dup(1);
 	int tmperr = dup(2);
-	//set the initial input
 	int fdin;	
 	if (_inputFile) {
 		fdin = open(_inputFile,O_RDONLY, 0700);
 	}
 	else {
-		// Use default input
 		fdin = dup(tmpin);
 	}
 	int ret;
 	int fdout;
 	int ferr;
 	for(i=0;i<_numberOfSimpleCommands;i++) {
-		//redirect input
 		dup2(fdin, 0);
 		close(fdin);
-		//setup output
 		if (i == _numberOfSimpleCommands-1){
-			// Last simple command
 			if(_outFile){
-				if(_app == 1)
+				if(_app == 1){
 					fdout=open(_outFile,O_RDWR|O_CREAT|O_APPEND,0600);
-				else if(_app == 0)
+				}
+				else if(_app == 0){
 					fdout=open(_outFile,O_RDWR|O_CREAT|O_TRUNC,0600);
+				}
+				else{
+				}
 			}
 			else {
-		
 				fdout=dup(tmpout);
 			}
 			if(_errFile){
@@ -311,13 +303,10 @@ Command::execute()
 			}
 			else{
 				ferr = dup(tmperr);
-
 			}
-
 		}
 		
 		else {
-		
 			int fdpipe[2];
 			pipe(fdpipe);
 			fdout=fdpipe[1];
@@ -327,10 +316,6 @@ Command::execute()
 		dup2(fdout,1);
 		close(fdout);
 
-		
-
-		
-		
 		ret=fork();
 		if(ret==0) {
 			if(!strcmp(_simpleCommands[i]->_arguments[0],"printenv")){
@@ -340,10 +325,8 @@ Command::execute()
 					p++;
 				}
 				exit(0);
-		}
-
-
-		execvp(_simpleCommands[i]->_arguments[0],_simpleCommands[i]->_arguments);
+			}	
+			execvp(_simpleCommands[i]->_arguments[0],_simpleCommands[i]->_arguments);
 			perror("execvp");
 			_exit(1);
 		}
@@ -352,25 +335,9 @@ Command::execute()
 			_exit(2);
 		}
 		else{
-			// This is the parent process
-			// ret is the pid of the child
-			// Wait until the child exits
 			waitpid(ret, NULL,0);
 		}
-	} // for
-
-
-
-
-
-
-
-		// execute
-
-		// Add execution here
-		// For every simple command fork a new process
-		// Setup i/o redirection
-		// and call exec
+	} 
 
 	dup2(tmpin,0);
 	dup2(tmpout,1);
@@ -379,32 +346,20 @@ Command::execute()
 	close(tmpout);
 	close(tmperr);
 	if (!_background) {
-// Wait for last command
-	waitpid(ret, NULL,0);
+		waitpid(ret, NULL,0);
 	}	
-
-
-
-
-
-	
-
-		// Clear to prepare for next command
 	clear();
-	
-	// Print new prompt
 	prompt();
 }
 
-// Shell implementation
 
 void
 Command::prompt()
 {
-if(isatty(0)){
-	printf("myshell>");
-	fflush(stdout);
-}
+	if(isatty(0)){
+		printf("myshell>");
+		fflush(stdout);
+	}
 }
 
 void ctrlc( int sig ){
