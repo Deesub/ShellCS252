@@ -388,9 +388,11 @@ void expandWildcards(char * prefix, char * suffix){
 			if(array[i][0] == '/' && array[i][1] == '/'){
 				char *st = array[i];
 				st++;
+			Command::_currentSimpleCommand->insertArgument(strdup(st));
 			}
-		
+			else{
 			Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
+			}
 		}
 	
 	free(array); 
