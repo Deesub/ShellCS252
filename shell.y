@@ -212,8 +212,7 @@ void expandWildcards(char * prefix, char * suffix){
 		
 		strncpy(arg,suffix,s-suffix);
 		arg[s-suffix] = '\0';
-		
-		//printf("ARG is[%s]\n",arg);
+		homef++;
 		suffix = s+1;
 		flag = 1;
 		flag1 = 0;
@@ -222,12 +221,14 @@ void expandWildcards(char * prefix, char * suffix){
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 		flag1 = 1;
+		homef++;
 		flag = 0;
 	}
 
 	char newPrefix[MAXFILENAME];
 	char * b;
 	char * c;
+	homef = flag1;
 	b = strchr(arg,'*');
 	c = strchr(arg,'?');
 	if(b == NULL && c == NULL){
@@ -235,12 +236,13 @@ void expandWildcards(char * prefix, char * suffix){
 			strcat(arg, "/");
 		}
 		if( prefix == NULL){
-			
-			sprintf(newPrefix,"%s",arg);
+			homef =flag;
+	 		sprintf(newPrefix,"%s",arg);
 			//expandWildcards(newPrefix,suffix);
 		}
 		
-		else {
+		else {  
+			homef = flag;
 			sprintf(newPrefix, "%s/%s", prefix, arg);
 			//expandWildcards(newPrefix, suffix);
 		}
@@ -256,6 +258,7 @@ void expandWildcards(char * prefix, char * suffix){
 	char * r = reg;
 	*r = '^';
 	r++;
+	homef = 100 - flag;
 
 	while(*a) {
 		if( *a == '*'){
@@ -283,6 +286,7 @@ void expandWildcards(char * prefix, char * suffix){
 	*r = '$';
 	r++;
 	*r = 0;
+	homef = 100 -flag1;
 
 	
 	int regco = 0;
@@ -299,6 +303,7 @@ void expandWildcards(char * prefix, char * suffix){
 	char * dir;
 	if(prefix == NULL){
 		dir = strdup(".");
+		homef-=1000;
 	}
 	else
 	{
@@ -320,6 +325,7 @@ void expandWildcards(char * prefix, char * suffix){
 	struct dirent * ent;
 	int maxEntries = 20;
 	int nEntries = 0;
+	homef++;
 	char ** array = (char**)malloc(1000*maxEntries*sizeof(char*));
 	regmatch_t fucboi;
 	while((ent = readdir(d))!=NULL){
@@ -381,7 +387,7 @@ void expandWildcards(char * prefix, char * suffix){
 	                        }*/
 			}
 		}
-				
+		homef -=10;		
 		closedir(d);
 		sortArrayStrings(array,nEntries);
 		int i = 0;
@@ -395,7 +401,7 @@ void expandWildcards(char * prefix, char * suffix){
 				Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 			}
 		}
-	
+	homef = flag - flag1;
 	free(array); 
 	return;
 }
