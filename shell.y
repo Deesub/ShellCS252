@@ -350,7 +350,7 @@ void expandWildcards(char * prefix, char * suffix){
 						array = (char**)realloc(array,1000*maxEntries*sizeof(char*));
 						assert(array!=NULL);
 					}
-					if (flag1 == 1 && flag != 1 ) {
+					if (flag1 == 1) {
 						if (prefix == NULL) {
 							sprintf(newPrefix, "%s", ent->d_name);
 						}
@@ -362,7 +362,7 @@ void expandWildcards(char * prefix, char * suffix){
 						array[nEntries] = strdup(newPrefix);
 						nEntries++;
 					}
-					else if(flag == 1 && flag != 1){
+					else if(flag == 1){
 						sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
 						expandWildcards(newPrefix,suffix);
 					}
