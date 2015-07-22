@@ -300,7 +300,7 @@ void expandWildcards(char * prefix, char * suffix){
 	}
 	else
 	{
-		if (prefix[0] != '/' && strlen(prefix) >= 1) {
+		if (prefix[0] != '/') {
 			dir = strdup("/");
 			dir = strcat(prefix, dir);
 		}
