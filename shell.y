@@ -216,11 +216,13 @@ void expandWildcards(char * prefix, char * suffix){
 		//printf("ARG is[%s]\n",arg);
 		suffix = s+1;
 		flag = 1;
+		flag1 = 0;
 	}
 	else{
 		strcpy(arg,suffix);
 		suffix = suffix + strlen(suffix);
 		flag1 = 1;
+		flag = 0;
 	}
 
 	char newPrefix[MAXFILENAME];
@@ -384,14 +386,13 @@ void expandWildcards(char * prefix, char * suffix){
 		sortArrayStrings(array,nEntries);
 		int i = 0;
 		for(i = 0;i < nEntries;i++){
-			//printf("ARAY [%s]\n",array[i]);
 			if(array[i][0] == '/' && array[i][1] == '/'){
 				char *st = array[i];
 				st++;
-			Command::_currentSimpleCommand->insertArgument(strdup(st));
+				Command::_currentSimpleCommand->insertArgument(strdup(st));
 			}
 			else{
-			Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
+				Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
 			}
 		}
 	
