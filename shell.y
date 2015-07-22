@@ -351,7 +351,7 @@ void expandWildcards(char * prefix, char * suffix){
 						assert(array!=NULL);
 					}
 					if (flag1 == 1) {
-						if (prefix == NULL && flag1 != 0) {
+						if (prefix == NULL && flag1 != 0 && flag ==0) {
 							sprintf(newPrefix, "%s", ent->d_name);
 						}
 						else if(prefix != NULL && flag1 != 0) {
