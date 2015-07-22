@@ -324,11 +324,11 @@ void expandWildcards(char * prefix, char * suffix){
 	
 		if(regexec(&re,ent->d_name,1,&fucboi,0)== 0){
 				if(ent->d_name[0] == '.'){
-					/*if(nEntries == maxEntries){
+					if(nEntries == maxEntries){
 						maxEntries*=2;
 						array = (char**)realloc(array,1000*maxEntries*sizeof(char*));
 						assert(array!=NULL);
-						}*/
+						}
 					if(arg[0] == '.'){
 						if(prefix != NULL){
 							sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
@@ -343,11 +343,11 @@ void expandWildcards(char * prefix, char * suffix){
 				}
 
 				else if ((strchr(suffix, '/') == NULL) || (strchr(suffix, '*') == NULL)) {
-					/*if(nEntries == maxEntries){
+					if(nEntries == maxEntries){
 						maxEntries*=2;
 						array = (char**)realloc(array,1000*maxEntries*sizeof(char*));
 						assert(array!=NULL);
-					}*/
+					}
 					if (flag1 == 1) {
 						if (prefix == NULL) {
 							sprintf(newPrefix, "%s", ent->d_name);
@@ -363,11 +363,11 @@ void expandWildcards(char * prefix, char * suffix){
 						expandWildcards(newPrefix,suffix);
 					}
 				}
-				if(nEntries == maxEntries){
+				/*if(nEntries == maxEntries){
 					maxEntries*=2;
 					array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
 					assert(array!=NULL);
-	                        }
+	                        }*/
 			}
 		}
 				
