@@ -386,7 +386,8 @@ void expandWildcards(char * prefix, char * suffix){
 		for(i = 0;i < nEntries;i++){
 			//printf("ARAY [%s]\n",array[i]);
 			if(array[i][0] == '/' && array[i][1] == '/'){
-				array[i]++;
+				char *st = array[i];
+				st++;
 			}
 		
 			Command::_currentSimpleCommand->insertArgument(strdup(array[i]));
