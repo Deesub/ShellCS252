@@ -102,9 +102,9 @@ void myunputc(int c) {
 		}
 		else
 		{
-		escape[j] = yytext[i];
-		j++;
-		i++;
+			escape[j] = yytext[i];
+			j++;
+			i++;
 		}
 		i++;
 	}
@@ -119,7 +119,7 @@ void myunputc(int c) {
 		/* Assume that file names have only alpha chars */
 		yylval.string_val = strdup(yytext);
 		return WORD;
-	}
+}
 
 
 
@@ -139,8 +139,7 @@ void myunputc(int c) {
 
 
  `[^\n`]*`	{
- 	//char buffer[100];
-	//char * cmd = (char*)malloc(1000);
+
 	int i = 0;
 	int j = 0;
 	int k = 0;
@@ -150,8 +149,8 @@ void myunputc(int c) {
 	char * cmd = strdup(yytext);
 	cmd[strlen(yytext)-1] = '\0';
 	cmd++;
-	//printf("STRINg is [%s]\n",cmd);
 	int len = strlen(cmd);
+	
 	int tmpin = dup(0);
 	int tmpout = dup(1);
 
@@ -195,6 +194,9 @@ void myunputc(int c) {
 		perror("fork");
 		exit(1);
 	}
+	else{
+	}
+
 	dup2(tmpin,0);
 	dup2(tmpout,1);
 
