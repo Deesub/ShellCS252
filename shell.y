@@ -370,6 +370,8 @@ void expandWildcards(char * prefix, char * suffix){
 					else{
 					}
 				}
+				else{
+				}
 				/*if(nEntries == maxEntries){
 					maxEntries*=2;
 					array = (char**)realloc(array,1000*maxEntries * sizeof(char*));
