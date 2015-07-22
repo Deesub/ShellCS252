@@ -343,6 +343,11 @@ void expandWildcards(char * prefix, char * suffix){
 				}
 
 				else if ((strchr(suffix, '/') == NULL) || (strchr(suffix, '*') == NULL)) {
+					if(nEntries == maxEntries){
+						maxEntries*=2;
+						array = (char**)realloc(array,1000*maxEntries*sizeof(char*));
+						assert(array!=NULL);
+					}
 					if (flag1 == 1) {
 						if (prefix == NULL) {
 							sprintf(newPrefix, "%s", ent->d_name);
