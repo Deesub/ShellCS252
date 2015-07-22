@@ -118,9 +118,11 @@ SimpleCommand::insertArgument( char * argument )
 		if(len == 1){
 			argument = strdup(getenv("HOME"));
 		}
-		else
+		else if(len > 1)
 		{
 			argument = strdup(getpwnam(argument+1)->pw_dir);
+		}
+		else{
 		}
 	}
 	 
@@ -227,12 +229,11 @@ Command::execute()
 		return;
 	}
 	if(strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0){
-	
-	_exit(1);
+		_exit(1);
 	}
 
 	if(!strcmp(_simpleCommands[i]->_arguments[0],"setenv")){
-			setenv(_simpleCommands[i]->_arguments[1],_simpleCommands[i]->_arguments[2],1);
+		setenv(_simpleCommands[i]->_arguments[1],_simpleCommands[i]->_arguments[2],1);
 
 	}
 
