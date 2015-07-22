@@ -329,12 +329,14 @@ void expandWildcards(char * prefix, char * suffix){
 						array = (char**)realloc(array,1000*maxEntries*sizeof(char*));
 						assert(array!=NULL);
 						}
-					if(arg[0] == '.'){
-						if(prefix != NULL){
+						if(arg[0] == '.' && strlen(arg) > 0){
+							if(prefix == NULL){
+								sprintf(newPrefix,"%s",ent->d_name);
+							}
+						else if(prefix != NULL){
 							sprintf(newPrefix,"%s/%s",prefix,ent->d_name);
 						}
-						else {
-							sprintf(newPrefix,"%s",ent->d_name);
+						else{
 						}
 						array[nEntries] = strdup(newPrefix);
 						nEntries++;
