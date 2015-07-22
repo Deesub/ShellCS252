@@ -303,7 +303,7 @@ Command::execute()
 					fdout=open(_outFile,O_RDWR|O_CREAT|O_TRUNC,0600);
 			}
 			else {
-			// Use default output
+		
 				fdout=dup(tmpout);
 			}
 			if(_errFile){
@@ -317,16 +317,13 @@ Command::execute()
 		}
 		
 		else {
-			// Not last
-			//simple command
-			//create pipe
+		
 			int fdpipe[2];
 			pipe(fdpipe);
 			fdout=fdpipe[1];
 			fdin=fdpipe[0];
 		}	
-		// if/else
-		// Redirect output
+
 		dup2(fdout,1);
 		close(fdout);
 
@@ -343,12 +340,12 @@ Command::execute()
 					p++;
 				}
 				exit(0);
-			}
+		}
 
 
 		execvp(_simpleCommands[i]->_arguments[0],_simpleCommands[i]->_arguments);
-		perror("execvp");
-		_exit(1);
+			perror("execvp");
+			_exit(1);
 		}
 		else if(ret<0){
 			perror("fork");
@@ -406,12 +403,11 @@ Command::prompt()
 {
 if(isatty(0)){
 	printf("myshell>");
-	
 	fflush(stdout);
 }
 }
 
-void disp( int sig ){
+void ctrlc( int sig ){
 	fprintf(stderr,"\n");
 	Command::_currentCommand.prompt();
 }
@@ -442,7 +438,7 @@ main()
 	}
 	
 	struct sigaction signalAction1;
-	signalAction1.sa_handler = disp;
+	signalAction1.sa_handler = ctrlc;
 	sigemptyset(&signalAction1.sa_mask);
 	signalAction1.sa_flags = SA_RESTART;
 	int error1 = sigaction(SIGINT, &signalAction1, NULL );
