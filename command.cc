@@ -222,13 +222,12 @@ Command::execute()
 	int i = 0;
 	// Don't do anything if there are no simple commands
 	if ( _numberOfSimpleCommands == 0 ) {
-		//fflush(stdout);
-		//clear();
-		prompt();
+		
+		//prompt();
 		return;
 	}
-	if(strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0){
-	//printf("Goodbye! \n\n" );
+	if(!strcmp(_simpleCommands[0]->_arguments[0],"exit") == 0){
+	
 	_exit(1);
 	}
 
