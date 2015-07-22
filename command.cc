@@ -232,7 +232,7 @@ Command::execute()
 	_exit(1);
 	}
 
-	if(!strcmp(_simpleCommands[i]->_arguments[0],"setenv")){
+	if(strcmp(_simpleCommands[i]->_arguments[0],"setenv")){
 			setenv(_simpleCommands[i]->_arguments[1],_simpleCommands[i]->_arguments[2],1);
 
 	}
