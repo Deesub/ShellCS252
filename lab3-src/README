@@ -1,0 +1,36 @@
+Name : Dhruv Subramanian
+CS 252, Lab 3
+
+
+
+PART 1:
+Modified the thr1.cc.
+
+3.)On initially running the unmodified thr1, we see that the output will be random generation of A's, B's and C's.
+5.)The PRINTC will be called before the threads are reached , hence sending the program into an infinite loop only printing C's
+
+
+PART 2:
+
+
+Modified count.cc
+
+
+PART 3:
+
+							System  (Kernel) Time 	   User Time	     Real Time
+pthread_mutex (count)	                                    2.324s		     2.640s		2.492s
+spin lock (count_spin with thr_yield)	 	 	    0.192s		     0.612s	        0.449s
+spin_lock (count_spin without thr_yield) 	 	    0.000s 	             3.412s		1.708s	
+
+
+
+1.)The difference in time is associated with the fact that when pthread_yield is called, there is no check to see if the processor is free, but only when all threads are done their job does anything else get completed
+2.)The difference in time is associated with the fact that mutex_lock calls wait.
+
+
+PART 4: 
+
+
+deadlock.cc is fixed
+
